@@ -1,0 +1,9 @@
+<div class="modal" [hidden]="!visible">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="close()">x</span>
+    <div class="container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

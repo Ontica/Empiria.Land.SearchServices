@@ -1,0 +1,149 @@
+/* Reset */
+html,
+body,
+div {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Box-sizing border-box */
+* {
+  box-sizing: border-box;
+}
+
+/* Set up a default font and some padding to provide breathing room */
+* {
+  line-height: 1.5em;
+  color: #333;
+  background-color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 1em;
+}
+
+
+.bold-text {
+  font-weight: bold;
+  color: red;
+}
+.new-section  {
+    color:white;
+    background-color:#027339;
+    line-height: 2.0em;
+    font-weight: 600;
+}
+.date-time {
+  font-weight: bold;
+}
+.date{
+  font-weight: bold;
+}
+.warning-status-text{
+  font-weight: bold;
+}
+.ok-status-text {
+  font-weight: bold;
+}
+.mono-space-text {
+  font-weight: bold;
+}
+.enhanced-text {
+  font: 15px arial, sans-serif;
+  color: mediumblue;
+}
+.money {
+ font-weight: bold;
+}
+
+label {
+  color: #222;
+  font-size: 1.05em;
+  font-weight: 500;
+}
+h1 {
+  color: darkgreen;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+h2 {
+  color: #555;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+h3 {
+  color: darkgreen;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1.0em;
+}
+a, h2, h3, h4, h5 {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif
+}
+a {
+    color: darkgreen;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+copyright a {
+    color: #888;
+    text-decoration: none;
+    line-height: inherit;
+    cursor: pointer;
+}
+copyright a:hover a:focus {
+    color: darkgreen;
+    text-decoration: none;
+    line-height: inherit;
+    cursor: pointer;
+}
+#imgUpperLine {
+  height: 24px;
+  width: 100%;
+  overflow: hidden;
+}
+p {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 20px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+ul {
+  margin: 10px 0 0 0;
+  padding: 0 0 0 20px;
+}
+
+li {
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+input {
+  border: 1px solid #106cc8;
+  font-size: 14px;
+  height: 40px;
+  outline: none;
+  padding: 8px;
+}
+
+button {
+  background-color: #106cc8;
+  border-style: none;
+  color: rgba(255, 255, 255, 0.87);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  height: 40px;
+  padding: 8px 18px;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: #28739e;
+}
+
+

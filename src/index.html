@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <base href="<%= APP_BASE %>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Registro Público de la Propiedad. Gobierno del Estado de Tlaxcala.</title>
+  <meta name="description" content="Registro Público de la Propiedad. Gobierno del Estado de Tlaxcala.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.css">
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+  <empiria-trade-web-app>Registro Público de la Propiedad. Gobierno del Estado de Tlaxcala. Cargando la aplicación de servicios en línea ...</empiria-trade-web-app>
+
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
+
+  <!-- shims:js -->
+  <!-- endinject -->
+
+  <% if (ENV === 'dev') { %>
+  <script>
+    System.config(<%=
+      JSON.stringify(SYSTEM_CONFIG, null, 2)
+    %>)
+  </script>
+  <% } %>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <% if (ENV === 'dev') { %>
+  <script>
+  System.import('<%= BOOTSTRAP_MODULE %>')
+    .catch(function (e) {
+      console.error(e,
+          'Report this error at https://github.com/Ontica/Empiria.Trade.WebApp/issues');
+    });
+  </script>
+  <% } %>
+
+</body>
+</html>
