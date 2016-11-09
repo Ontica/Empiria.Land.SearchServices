@@ -40,8 +40,7 @@ export class RetrievalService {
   // region Public methods
 
   private getPropertyItems(url: string, uid:string): Promise<PropertyItem[]> {
-    const servicesServer = 'http://empiria-land.azurewebsites.net/api';
-   // const servicesServer = 'http://empiria.land/web.api';
+    const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services';
 
     return this.http.get(servicesServer + '\\' +  url + uid)
       .toPromise()

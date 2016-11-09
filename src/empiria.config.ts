@@ -1,5 +1,5 @@
 /**
- *  Solution : Empiria Trade Client                             || v0.1.0625
+ *  Solution : Empiria Land Search Services                             || v0.1.1023
  *  Type     : ConfigData
  *  Summary  : Internal type used to hold testing configuration data.
  *
@@ -11,7 +11,7 @@ import {Session} from 'empiria';
 import {DataOperationDef} from 'empiria';
 
 
-const TESTS_SERVER = 'http://masautopartes.com.mx/api/';
+const TESTS_SERVER = 'http://land/api/';
 
 const TESTS_API_KEY = 'Tr4d3fGZUTzp7pRdUHWTQVcB6TWpLaATAwDPeYzX9yV8eYTNxCe5rsL9dZwererx';
 

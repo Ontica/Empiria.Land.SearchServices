@@ -12,7 +12,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    this.APP_TITLE = 'Empiria Trade: Red de comercio colaborativo';
+    this.APP_TITLE = 'Dirección de Notarías y Registros Públicos | Gobierno del Estado de Tlaxcala';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;

@@ -10,7 +10,7 @@ import { Config } from './shared/index';
  */
 @Component({
   moduleId: module.id,
-  selector: 'empiria-trade-web-app',
+  selector: 'empiria-land',
   viewProviders: [HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
   directives: [ROUTER_DIRECTIVES]

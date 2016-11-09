@@ -106,7 +106,7 @@ export class SearchForm implements OnInit {
     this.itemUID = '';
     this.document = [];
     this.selectedDocumentItemName = this.getSelectedItemName();
-    this.router.navigate(['buscar'], { queryParams: {} });
+    this.router.navigate(['/'], { queryParams: {} });
   }
 
 

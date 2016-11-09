@@ -9,7 +9,7 @@
 					</div>
 					<div class="medium-8 columns">
 						<select [ngModel]="selectedDocumentItemType" [ngModelOptions]="{standalone: true}" id="searchBox" #selectBox (change)="setDocumentItem(selectBox.value)">
-                        <option value="{{DocumentItemType.empty}}">( Favor de seleccionar una opción )</option>
+                        <option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
                         <option value="{{DocumentItemType.landTransaction}}">Consultar el estado de un trámite</option>
                         <option value="{{DocumentItemType.landResources}}">Consultar un folio real (predio o sociedad)</option>
                         <option value="{{DocumentItemType.empty}}"></option>

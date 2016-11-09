@@ -5,12 +5,7 @@ import {  SearchForm } from './index';
 export const SearchRoutes: RouterConfig = [
   {
     path: '',
-    redirectTo: 'buscar',
+    component: SearchForm,
     pathMatch: 'full'
-  },
-
-   {
-     path: 'buscar',
-     component: SearchForm
-   }
+  }
 ];

@@ -140,7 +140,7 @@ export class SeedConfig {
    * @type {string}
    */
   //APP_TITLE = 'Welcome to angular2-seed!';
-  APP_TITLE = 'Empiria Trade: Red de comercio colaborativo';
+  APP_TITLE = 'Registro Público de la Propiedad | Gobierno del Estado de Tlaxcala';
 
   /**
    * The base folder of the applications source files.

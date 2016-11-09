@@ -1,14 +1,14 @@
 {
-  "name": "empiria-trade-app",
+  "name": "empiria-land-search-services",
   "author": "La Vía Óntica SC || Ontica LLC",
-  "version": "0.2.0",
-  "description": "Empiria Trade - Comercio electrónico colaborativo",
+  "version": "0.3.0",
+  "description": "Empiria Land - Servicios de consultas en línea",
   "license": "AGPL-3.0",
   "homepage": "http://ontica.org",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ontica/Empiria.Trade.WebApp"
+    "url": "https://github.com/Ontica/Empiria.Land.SearchServices"
   },
   "contributors": [
     "Christian Yáñez <cyanez@ontica.org>",
@@ -16,25 +16,18 @@
   ],
   "keywords": [
     "Empiria",
-    "Trade",
-    "framework",
-    "library",
-    "comercio",
-    "B2B",
-    "business-to-business",
-    "fair trade",
-    "trading community",
-    "C-commerce",
-    "collaborative commerce",
-    "comercio electrónico",
-    "economía colaborativa",
-    "red de comercio",
-    "e-commerce",
-    "commerce",
-    "suministro",
-    "supply management",
-    "supply chain management",
-    "cadena del suministro"
+    "Land",
+    "registro público",
+    "servicios en línea",
+    "gobierno electrónico",
+    "administración territorial",
+    "land recording system",
+    "e-government",
+    "notarías",
+    "Infonavit",
+    "México",
+    "Tlaxcala",
+    "Zacatecas"
   ],
   "scripts": {
     "build.dev": "gulp build.dev --color --config-env dev",
@@ -154,8 +147,6 @@
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.27",
     "zone.js": "^0.6.12",
-    "empiria": "^0.3.3",
-    "empiria-trade": "^0.2.3",
     "reflect-metadata": "^0.1.3"
   }
 }

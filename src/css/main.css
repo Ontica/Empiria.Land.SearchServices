@@ -22,48 +22,17 @@ div {
 }
 
 
-.bold-text {
-  font-weight: bold;
-  color: red;
-}
-.new-section  {
-    color:white;
-    background-color:#027339;
-    line-height: 2.0em;
-    font-weight: 600;
-}
-.date-time {
-  font-weight: bold;
-}
-.date{
-  font-weight: bold;
-}
-.warning-status-text{
-  font-weight: bold;
-}
-.ok-status-text {
-  font-weight: bold;
-}
-.mono-space-text {
-  font-weight: bold;
-}
-.enhanced-text {
-  font: 15px arial, sans-serif;
-  color: mediumblue;
-}
-.money {
- font-weight: bold;
-}
-
-label {
-  color: #222;
-  font-size: 1.05em;
-  font-weight: 500;
+.mainTitle {
+  background-color: #005800;
+  line-height: 1.8em;
+  padding-top: 0.4em;
+  text-align:center;
 }
 h1 {
-  color: darkgreen;
-  font-size: 1.8em;
-  font-weight: 600;
+    color: whitesmoke;
+    background-color: transparent;
+    font-size: 1.4em;
+    font-weight: 200;
 }
 h2 {
   color: #555;
@@ -92,12 +61,14 @@ copyright a {
     text-decoration: none;
     line-height: inherit;
     cursor: pointer;
+    font-size:8pt;
 }
 copyright a:hover a:focus {
     color: darkgreen;
     text-decoration: none;
     line-height: inherit;
     cursor: pointer;
+    font-size:8pt;
 }
 #imgUpperLine {
   height: 24px;
@@ -147,3 +118,42 @@ button:hover {
 }
 
 
+
+.bold-text {
+  font-weight: bold;
+  color: red;
+}
+.new-section  {
+    color:white;
+    background-color:#027339;
+    line-height: 2.0em;
+    font-weight: 600;
+}
+.date-time {
+  font-weight: bold;
+}
+.date{
+  font-weight: bold;
+}
+.warning-status-text{
+  font-weight: bold;
+}
+.ok-status-text {
+  font-weight: bold;
+}
+.mono-space-text {
+  font-weight: bold;
+}
+.enhanced-text {
+  font: 15px arial, sans-serif;
+  color: mediumblue;
+}
+.money {
+ font-weight: bold;
+}
+
+label {
+  color: #222;
+  font-size: 1.05em;
+  font-weight: 500;
+}
