@@ -7,7 +7,7 @@
 					<div class="medium-4 columns">
 						<label for="searchBox">¿Qué desea hacer?</label>
 					</div>
-					<div class="medium-8 columns">
+					<div class="medium-8  columns">
 						<select [ngModel]="selectedDocumentItemType" [ngModelOptions]="{standalone: true}" id="searchBox" #selectBox (change)="setDocumentItem(selectBox.value)">
                         <option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
                         <option value="{{DocumentItemType.landTransaction}}">Consultar el estado de un trámite</option>
@@ -39,7 +39,23 @@
 		</div>
 	</div>
 </form>
-
+<div class="row" *ngIf="hasError">
+	<div class="medium-6 medium-centered columns">
+		<div class="row">
+			<div class="medium-12 columns">
+				<label class="new-error-section">&nbsp;&nbsp;&nbsp;</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="medium-2 columns">
+				<i class="fa fa-exclamation-triangle fa-4x" style="color:red"></i>
+			</div>
+			<div class="medium-10 columns">
+				<div Class="warning-status-text">{{errorMessage}}</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="medium-6 medium-centered columns">
 		<div class="row" *ngFor="let documentItem of document">
@@ -55,6 +71,14 @@
 					</div>
 					<div class="medium-8 columns">
 						<div [ngClass]="documentItem.style">{{documentItem.value | date:'dd MMM yyyy HH:mm a' }}</div>
+					</div>
+				</div>
+				<div *ngSwitchCase="'date'">
+					<div class="medium-4 columns">
+						<label>{{documentItem.name}}:</label>
+					</div>
+					<div class="medium-8 columns">
+						<div [ngClass]="documentItem.style">{{documentItem.value | date:'dd MMM yyyy' }}</div>
 					</div>
 				</div>
 				<div *ngSwitchDefault>

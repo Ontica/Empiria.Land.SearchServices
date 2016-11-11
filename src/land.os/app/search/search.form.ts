@@ -34,6 +34,8 @@ export class SearchForm implements OnInit {
   public selectedDocumentItemName = 'Buscar';
   public document: PropertyItem[];
   public itemUID = '';
+  public hasError = false;
+  public errorMessage = '';
   private subscription: any;
 
   constructor(private retrievalService: RetrievalService, private router: Router) {
@@ -42,8 +44,8 @@ export class SearchForm implements OnInit {
 
   ngOnInit() {
     this.subscription = this.router.routerState.queryParams.subscribe(params => {
-      let docType =  params['docType'] || 'empty';
-      this.selectedDocumentItemType =  (<any> DocumentItemType)[docType];
+      let docType = params['docType'] || 'empty';
+      this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
       this.itemUID = params['itemUID'] || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
       this.searchDocument();
@@ -74,6 +76,8 @@ export class SearchForm implements OnInit {
   }
 
   public searchDocument(): void {
+    this.hasError = false;
+    this.document = [];
     if (!this.validate()) {
       return;
     }
@@ -105,29 +109,31 @@ export class SearchForm implements OnInit {
     this.selectedDocumentItemType = 0;
     this.itemUID = '';
     this.document = [];
+    this.hasError = false;
     this.selectedDocumentItemName = this.getSelectedItemName();
     this.router.navigate(['/'], { queryParams: {} });
   }
 
 
   private showErrorMessage(error: any): void {
-    this.messageBox.showException(error.errorMessage || error);
+    this.hasError = true;
+    this.errorMessage = error.errorMessage;
   }
 
 
   private setDocument(document: PropertyItem[]): void {
-    console.log(document);
     this.document = document;
   }
 
 
   private validate(): boolean {
     if (this.DocumentItemType[this.selectedDocumentItemType] === 'empty') {
-     // alert('Selecciona un tipo de documento de la lista ');
+      // alert('Selecciona un tipo de documento de la lista ');
       return false;
     }
     if (this.itemUID.length === 0) {
-       this.messageBox.showMessage('El ' + this.selectedDocumentItemName + ' se encuentra en blanco');
+      this.hasError= true;
+      this.errorMessage = 'El ' + this.selectedDocumentItemName + ' se encuentra en blanco';
       return false;
     }
     if (!this.validatePatterns()) {
@@ -141,32 +147,37 @@ export class SearchForm implements OnInit {
     switch (this.DocumentItemType[this.selectedDocumentItemType]) {
       case 'landResources':
         if (this.itemUID.length !== 19) {
-          this.messageBox.showMessage('El ' + this.selectedDocumentItemName + ' no tiene formato correcto');
+          this.showValidatePatternsError();
           return false;
         }
         break;
       case 'landTransaction':
         if (this.itemUID.length !== 14) {
-           this.messageBox.showMessage('El ' + this.selectedDocumentItemName + ' no tiene formato correcto');
-          return false;
+           this.showValidatePatternsError();
+           return false;
         }
         break;
       case 'landCertificate':
         if (this.itemUID.length !== 20) {
-           this.messageBox.showMessage('El ' + this.selectedDocumentItemName + ' no tiene formato correcto');
-          return false;
+           this.showValidatePatternsError();
+           return false;
         }
         break;
       case 'recordingDocument':
         if (this.itemUID.length !== 20) {
-           this.messageBox.showMessage('El ' + this.selectedDocumentItemName + ' no tiene formato correcto');
-          return false;
+           this.showValidatePatternsError();
+           return false;
         }
         break;
       default:
         return false;
     }  // switch
     return true;
+  }
+
+  private showValidatePatternsError(): void {
+    this.hasError = true;
+    this.errorMessage = 'El ' + this.selectedDocumentItemName + ' no tiene formato correcto';
   }
 
 }  // class SearchForm

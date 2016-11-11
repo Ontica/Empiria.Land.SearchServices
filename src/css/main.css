@@ -121,7 +121,12 @@ button:hover {
 
 .bold-text {
   font-weight: bold;
-  color: red;
+}
+.new-error-section {
+  color:white;
+  background-color:red;
+  line-height: 2.0em;
+  font-weight: 600;
 }
 .new-section  {
     color:white;
