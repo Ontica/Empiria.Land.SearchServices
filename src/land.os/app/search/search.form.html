@@ -1,98 +1,105 @@
 <form>
-	<div class="row">
-		<div class="medium-6 medium-centered columns">
+	<div class="row contenedor-transparencia">
+		<div class="small-12 small-centered text-center columns">
+
 			<fieldset>
-				<legend></legend>
+
 				<div class="row">
-					<div class="medium-4 columns">
-						<label for="searchBox">¿Qué desea hacer?</label>
-					</div>
-					<div class="medium-8  columns">
-						<select [ngModel]="selectedDocumentItemType" [ngModelOptions]="{standalone: true}" id="searchBox" #selectBox (change)="setDocumentItem(selectBox.value)">
-                        <option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
-                        <option value="{{DocumentItemType.landTransaction}}">Consultar el estado de un trámite</option>
-                        <option value="{{DocumentItemType.landResources}}">Consultar un folio real (predio o sociedad)</option>
-                        <option value="{{DocumentItemType.empty}}"></option>
-                        <option value="{{DocumentItemType.landCertificate}}">Verificar la autenticidad de un certificado</option>
-                        <option value="{{DocumentItemType.recordingDocument}}">Verificar la autenticidad de un sello registral</option>
-                    </select>
+					<div class="columns" style='padding-top:1.0em'>
+						<div class='mainTitle'>Consulta y verificación de predios, trámites y documentos</div>
 					</div>
 				</div>
+
 				<div class="row">
-					<div class="medium-4 columns">
+					<div class="columns text-center">
+						<label for="searchBox">¿Qué desea consultar o verificar?</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns">
+						<select id="searchBox" #selectBox style='width:308px' [ngModel]="selectedDocumentItemType" [ngModelOptions]="{standalone: true}"
+							(change)="setDocumentItem(selectBox.value)">
+							<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
+							<option value="{{DocumentItemType.landCertificate}}">Un certificado</option>
+							<option value="{{DocumentItemType.recordingDocument}}">Un documento inscrito (sello registral)</option>
+							<option value="{{DocumentItemType.landResources}}">Un predio o sociedad (folio real)</option>
+							<option value="{{DocumentItemType.landTransaction}}">Un trámite</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns text-center">
 						<label for="searchValue">{{selectedDocumentItemName}}:</label>
 					</div>
-					<div class="medium-8 columns">
-						<input type="text" (input)="itemUID=$event.target.value.toUpperCase()" value="{{itemUID}}" placeholder="{{selectedDocumentItemName}}"
-							maxlength="20" id="searchValue" (keydown.enter)="searchDocument()">
-					</div>
 				</div>
+
 				<div class="row">
-					<div class="medium-6 columns">
-						<a (click)="clearForm()">Realizar una nueva búsqueda</a>
-					</div>
-					<div class="medium-6 columns">
-						<a class="medium button success float-right" (click)="searchDocument()">Buscar</a>
+					<div class="columns small-12 small-centered">
+						<input style='width:308px;margin:auto' type="text" (input)="itemUID=$event.target.value.toUpperCase()" value="{{itemUID}}"
+							placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue" (keydown.enter)="searchDocument()">
 					</div>
 				</div>
+
+
+				<div class="row">
+					<div class="columns small-12 small-centered" style='width:326px;vertical-align:middle'>
+						<span style="float:left">
+							<label><a (click)="clearForm()">Limpiar datos</a></label>
+						</span>
+						<span style="float:right">
+							<a class="button" (click)="searchDocument()">Buscar</a>
+						</span>
+					</div>
+				</div>
+
 			</fieldset>
+
 		</div>
 	</div>
 </form>
-<div class="row" *ngIf="hasError">
-	<div class="medium-6 medium-centered columns">
-		<div class="row">
-			<div class="medium-12 columns">
-				<label class="new-error-section">&nbsp;&nbsp;&nbsp;</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="medium-2 columns">
-				<i class="fa fa-exclamation-triangle fa-4x" style="color:red"></i>
-			</div>
-			<div class="medium-10 columns">
-				<div Class="warning-status-text">{{errorMessage}}</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="medium-6 medium-centered columns">
-		<div class="row" *ngFor="let documentItem of document">
-			<div [ngSwitch]="documentItem.style">
-				<div *ngSwitchCase="'new-section'">
-					<div class="medium-12 columns">
-						<label ngClass="new-section">&nbsp;&nbsp;&nbsp;{{documentItem.name}}</label>
-					</div>
+
+<div *ngIf="document.length !== 0 || hasError">&nbsp;</div>
+
+<div class="row small-collapse contenedor-transparencia" *ngIf="document.length !== 0">
+	<div class="columns small-12 small-centered">
+		<div class="row small-collapse" *ngFor="let documentItem of document">
+
+			<div *ngIf="documentItem.style === 'new-section'">
+				<div class="columns medium-12 large-10 small-centered">
+					<div>&nbsp;</div>
+					<div class="new-section">{{documentItem.name}}</div>
 				</div>
-				<div *ngSwitchCase="'date-time'">
-					<div class="medium-4 columns">
-						<label>{{documentItem.name}}:</label>
-					</div>
-					<div class="medium-8 columns">
-						<div [ngClass]="documentItem.style">{{documentItem.value | date:'dd MMM yyyy HH:mm a' }}</div>
-					</div>
+			</div>
+
+			<div *ngIf="documentItem.style !== 'new-section'">
+				<div class="columns hide-for-medium">
+					<label class='small-label'>{{documentItem.name}}</label>
 				</div>
-				<div *ngSwitchCase="'date'">
-					<div class="medium-4 columns">
-						<label>{{documentItem.name}}:</label>
-					</div>
-					<div class="medium-8 columns">
-						<div [ngClass]="documentItem.style">{{documentItem.value | date:'dd MMM yyyy' }}</div>
-					</div>
+				<div class="columns medium-3 large-2 large-offset-1 show-for-medium">
+					<label class='left-indented'>{{documentItem.name}}:</label>
 				</div>
-				<div *ngSwitchDefault>
-					<div class="medium-4 columns">
-						<label>{{documentItem.name}}:</label>
-					</div>
-					<div class="medium-8 columns">
-						<div [ngClass]="documentItem.style">{{documentItem.value}}</div>
-					</div>
+				<div class="columns medium-9 large-9">
+					<div [ngClass]="'label-value ' + documentItem.style">{{documentItem.value}}</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<br>
-<br>
-<message-box></message-box>
+
+<div class="row small-collapse contenedor-rojo" *ngIf="hasError">
+
+	<div class="columns small-12 small-centered">
+
+		<div class="row small-collapse">
+			<div style="background-color:FireBrick;color:white;padding:0.5em">Ocurrió un problema</div>
+		</div>
+
+		<div class="row small-collapse" style='padding:1.0em' [innerHtml]="errorMessage">
+
+		</div>
+
+	</div>
+
+</div>

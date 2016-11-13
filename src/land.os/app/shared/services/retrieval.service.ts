@@ -19,6 +19,10 @@ export class RetrievalService {
 
   // region Public methods
 
+  public getItem(itemType: string, itemUID: string, itemHash: string): Promise<PropertyItem[]> {
+    return this.getPropertyItems(this.urlCertificate, itemUID);
+  }
+
   public getCertificate(certificateUID: string): Promise<PropertyItem[]> {
     return this.getPropertyItems(this.urlCertificate, certificateUID);
   }
@@ -39,10 +43,12 @@ export class RetrievalService {
 
   // region Public methods
 
-  private getPropertyItems(url: string, uid:string): Promise<PropertyItem[]> {
-    const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services';
+  private getPropertyItems(endpoint: string, uid:string): Promise<PropertyItem[]> {
+    const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services/';
 
-    return this.http.get(servicesServer + '\\' +  url + uid)
+    let url = servicesServer + endpoint + uid;  // + '?hash=12345';
+
+    return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as PropertyItem[])
       .catch(this.handleError);

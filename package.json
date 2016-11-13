@@ -53,6 +53,7 @@
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
+    "uglify": "uglifyjs dist/prod/js/app.js --screw-ie8 --compress --mangle --output dist/prod/js/app.min.js",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update"
   },

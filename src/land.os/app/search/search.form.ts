@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RetrievalService } from '../shared/services/retrieval.service';
@@ -6,7 +6,6 @@ import { RetrievalService } from '../shared/services/retrieval.service';
 import { PropertyItem } from '../shared/services/propertyItem';
 import 'rxjs/Rx';
 
-import { MessageBoxComponent } from '../../../global_shared/components/index';
 
 export enum DocumentItemType {
   empty = 0,
@@ -21,19 +20,17 @@ export enum DocumentItemType {
   selector: 'search-form',
   templateUrl: 'search.form.html',
 
-  directives: [MessageBoxComponent],
   providers: [RetrievalService]
 })
 
 export class SearchForm implements OnInit {
-
-  @ViewChild(MessageBoxComponent) public messageBox: MessageBoxComponent;
 
   public DocumentItemType = DocumentItemType;
   public selectedDocumentItemType = 0;
   public selectedDocumentItemName = 'Buscar';
   public document: PropertyItem[];
   public itemUID = '';
+  public itemHash = '';
   public hasError = false;
   public errorMessage = '';
   private subscription: any;
@@ -44,9 +41,10 @@ export class SearchForm implements OnInit {
 
   ngOnInit() {
     this.subscription = this.router.routerState.queryParams.subscribe(params => {
-      let docType = params['docType'] || 'empty';
+      let docType = params['type'] || 'empty';
       this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
-      this.itemUID = params['itemUID'] || '';
+      this.itemUID = params['uid'] || '';
+      this.itemHash = params['hash'] || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
       this.searchDocument();
     });
@@ -78,28 +76,39 @@ export class SearchForm implements OnInit {
   public searchDocument(): void {
     this.hasError = false;
     this.document = [];
+
     if (!this.validate()) {
       return;
     }
+
     switch (this.DocumentItemType[this.selectedDocumentItemType]) {
       case 'empty':
         return;
+
       case 'landResources':
-        this.retrievalService.getResources(this.itemUID).then(x => this.setDocument(x))
+        this.retrievalService.getResources(this.itemUID)
+          .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
-        break;
+        return;
+
       case 'landTransaction':
-        this.retrievalService.getTransaction(this.itemUID).then(x => this.setDocument(x))
+        this.retrievalService.getTransaction(this.itemUID)
+          .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
-        break;
+        return;
+
       case 'landCertificate':
-        this.retrievalService.getCertificate(this.itemUID).then(x => this.setDocument(x))
+        this.retrievalService.getCertificate(this.itemUID)
+          .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
-        break;
+        return;
+
       case 'recordingDocument':
-        this.retrievalService.getDocument(this.itemUID).then(x => this.setDocument(x))
+        this.retrievalService.getDocument(this.itemUID)
+          .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
-        break;
+        return;
+
       default:
         return;
     }
@@ -117,7 +126,7 @@ export class SearchForm implements OnInit {
 
   private showErrorMessage(error: any): void {
     this.hasError = true;
-    this.errorMessage = error.errorMessage;
+    this.errorMessage = (<string> error.errorMessage).replace(/\n/g, '<br />');
   }
 
 
@@ -128,12 +137,11 @@ export class SearchForm implements OnInit {
 
   private validate(): boolean {
     if (this.DocumentItemType[this.selectedDocumentItemType] === 'empty') {
-      // alert('Selecciona un tipo de documento de la lista ');
       return false;
     }
     if (this.itemUID.length === 0) {
-      this.hasError= true;
-      this.errorMessage = 'El ' + this.selectedDocumentItemName + ' se encuentra en blanco';
+      this.hasError = true;
+      this.errorMessage = 'El ' + this.selectedDocumentItemName + ' se encuentra en blanco.';
       return false;
     }
     if (!this.validatePatterns()) {
@@ -153,20 +161,20 @@ export class SearchForm implements OnInit {
         break;
       case 'landTransaction':
         if (this.itemUID.length !== 14) {
-           this.showValidatePatternsError();
-           return false;
+          this.showValidatePatternsError();
+          return false;
         }
         break;
       case 'landCertificate':
         if (this.itemUID.length !== 20) {
-           this.showValidatePatternsError();
-           return false;
+          this.showValidatePatternsError();
+          return false;
         }
         break;
       case 'recordingDocument':
         if (this.itemUID.length !== 20) {
-           this.showValidatePatternsError();
-           return false;
+          this.showValidatePatternsError();
+          return false;
         }
         break;
       default:
@@ -177,8 +185,8 @@ export class SearchForm implements OnInit {
 
   private showValidatePatternsError(): void {
     this.hasError = true;
-    this.errorMessage = 'El ' + this.selectedDocumentItemName + ' no tiene formato correcto';
+    this.errorMessage = 'El ' + this.selectedDocumentItemName +
+                        ' no tiene un formato correcto.<br />Favor de revisarlo e intentarlo nuevamente.';
   }
 
 }  // class SearchForm
-
