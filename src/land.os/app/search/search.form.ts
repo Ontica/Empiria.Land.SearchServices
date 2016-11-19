@@ -9,10 +9,10 @@ import 'rxjs/Rx';
 
 export enum DocumentItemType {
   empty = 0,
-  landResources = 1,
-  landTransaction = 2,
-  landCertificate = 3,
-  recordingDocument = 4
+  resource = 1,
+  transaction = 2,
+  certificate = 4,
+  document = 8
 }
 
 @Component({
@@ -42,7 +42,7 @@ export class SearchForm implements OnInit {
   ngOnInit() {
     this.subscription = this.router.routerState.queryParams.subscribe(params => {
       let docType = params['type'] || 'empty';
-      this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
+      this.selectedDocumentItemType = (<any> DocumentItemType)[docType];
       this.itemUID = params['uid'] || '';
       this.itemHash = params['hash'] || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
@@ -57,17 +57,22 @@ export class SearchForm implements OnInit {
   }
 
   public getSelectedItemName(): string {
-    switch (this.DocumentItemType[this.selectedDocumentItemType]) {
-      case 'empty':
+    switch (this.selectedDocumentItemType) {
+      case DocumentItemType.empty:
         return 'Buscar';
-      case 'landResources':
+
+      case DocumentItemType.resource:
         return 'Folio real';
-      case 'landTransaction':
+
+      case DocumentItemType.transaction:
         return 'Número de trámite';
-      case 'landCertificate':
+
+      case DocumentItemType.certificate:
         return 'Número de certificado';
-      case 'recordingDocument':
+
+      case DocumentItemType.document:
         return 'Número de sello registral';
+
       default:
         return '';
     }
@@ -81,29 +86,29 @@ export class SearchForm implements OnInit {
       return;
     }
 
-    switch (this.DocumentItemType[this.selectedDocumentItemType]) {
-      case 'empty':
+    switch (this.selectedDocumentItemType) {
+      case DocumentItemType.empty:
         return;
 
-      case 'landResources':
+      case DocumentItemType.resource:
         this.retrievalService.getResources(this.itemUID)
           .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
         return;
 
-      case 'landTransaction':
+      case DocumentItemType.transaction:
         this.retrievalService.getTransaction(this.itemUID)
           .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
         return;
 
-      case 'landCertificate':
+      case DocumentItemType.certificate:
         this.retrievalService.getCertificate(this.itemUID)
           .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
         return;
 
-      case 'recordingDocument':
+      case DocumentItemType.document:
         this.retrievalService.getDocument(this.itemUID)
           .then(x => this.setDocument(x))
           .catch(x => this.showErrorMessage(x));
@@ -136,7 +141,7 @@ export class SearchForm implements OnInit {
 
 
   private validate(): boolean {
-    if (this.DocumentItemType[this.selectedDocumentItemType] === 'empty') {
+    if (this.selectedDocumentItemType === DocumentItemType.empty) {
       return false;
     }
     if (this.itemUID.length === 0) {
@@ -152,41 +157,46 @@ export class SearchForm implements OnInit {
 
 
   private validatePatterns(): boolean {
-    switch (this.DocumentItemType[this.selectedDocumentItemType]) {
-      case 'landResources':
+    switch (this.selectedDocumentItemType) {
+      case DocumentItemType.resource:
         if (this.itemUID.length !== 19) {
           this.showValidatePatternsError();
           return false;
         }
         break;
-      case 'landTransaction':
+
+      case DocumentItemType.transaction:
         if (this.itemUID.length !== 14) {
           this.showValidatePatternsError();
           return false;
         }
         break;
-      case 'landCertificate':
+
+      case DocumentItemType.certificate:
         if (this.itemUID.length !== 20) {
           this.showValidatePatternsError();
           return false;
         }
         break;
-      case 'recordingDocument':
+
+      case DocumentItemType.document:
         if (this.itemUID.length !== 20) {
           this.showValidatePatternsError();
           return false;
         }
         break;
+
       default:
         return false;
     }  // switch
+
     return true;
   }
 
   private showValidatePatternsError(): void {
     this.hasError = true;
-    this.errorMessage = 'El ' + this.selectedDocumentItemName +
-                        ' no tiene un formato correcto.<br />Favor de revisarlo e intentarlo nuevamente.';
+    this.errorMessage = 'El ' + this.selectedDocumentItemName.toLowerCase() +
+                        ' no tiene un formato correcto. Favor de revisarlo e intentarlo nuevamente.';
   }
 
 }  // class SearchForm

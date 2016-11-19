@@ -21,10 +21,10 @@
 						<select id="searchBox" #selectBox style='width:308px' [ngModel]="selectedDocumentItemType" [ngModelOptions]="{standalone: true}"
 							(change)="setDocumentItem(selectBox.value)">
 							<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
-							<option value="{{DocumentItemType.landCertificate}}">Un certificado</option>
-							<option value="{{DocumentItemType.recordingDocument}}">Un documento inscrito (sello registral)</option>
-							<option value="{{DocumentItemType.landResources}}">Un predio o sociedad (folio real)</option>
-							<option value="{{DocumentItemType.landTransaction}}">Un trámite</option>
+							<option value="{{DocumentItemType.certificate}}">Un certificado</option>
+							<option value="{{DocumentItemType.document}}">Un documento inscrito (sello registral)</option>
+							<option value="{{DocumentItemType.resource}}">Un predio o sociedad (folio real)</option>
+							<option value="{{DocumentItemType.transaction}}">Un trámite</option>
 						</select>
 					</div>
 				</div>
