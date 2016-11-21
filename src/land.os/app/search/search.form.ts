@@ -1,19 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RetrievalService } from '../shared/services/retrieval.service';
+import { RetrievalService, DocumentItemType } from '../shared/services/retrieval.service';
 
 import { PropertyItem } from '../shared/services/propertyItem';
 import 'rxjs/Rx';
 
-
-export enum DocumentItemType {
-  empty = 0,
-  resource = 1,
-  transaction = 2,
-  certificate = 4,
-  document = 8
-}
 
 @Component({
   moduleId: module.id,
@@ -35,26 +27,30 @@ export class SearchForm implements OnInit {
   public errorMessage = '';
   private subscription: any;
 
+
   constructor(private retrievalService: RetrievalService, private router: Router) {
 
   }
+
 
   ngOnInit() {
     this.subscription = this.router.routerState.queryParams.subscribe(params => {
       let docType = params['type'] || 'empty';
       this.selectedDocumentItemType = (<any> DocumentItemType)[docType];
       this.itemUID = params['uid'] || '';
-      this.itemHash = params['hash'] || '';
+      this.itemHash = params['hash'] || undefined;
       this.selectedDocumentItemName = this.getSelectedItemName();
       this.searchDocument();
     });
 
   }
 
+
   public setDocumentItem(selectedValue: string): void {
     this.selectedDocumentItemType = Number(selectedValue);
     this.selectedDocumentItemName = this.getSelectedItemName();
   }
+
 
   public getSelectedItemName(): string {
     switch (this.selectedDocumentItemType) {
@@ -78,6 +74,7 @@ export class SearchForm implements OnInit {
     }
   }
 
+
   public searchDocument(): void {
     this.hasError = false;
     this.document = [];
@@ -86,38 +83,11 @@ export class SearchForm implements OnInit {
       return;
     }
 
-    switch (this.selectedDocumentItemType) {
-      case DocumentItemType.empty:
-        return;
-
-      case DocumentItemType.resource:
-        this.retrievalService.getResources(this.itemUID)
-          .then(x => this.setDocument(x))
-          .catch(x => this.showErrorMessage(x));
-        return;
-
-      case DocumentItemType.transaction:
-        this.retrievalService.getTransaction(this.itemUID)
-          .then(x => this.setDocument(x))
-          .catch(x => this.showErrorMessage(x));
-        return;
-
-      case DocumentItemType.certificate:
-        this.retrievalService.getCertificate(this.itemUID)
-          .then(x => this.setDocument(x))
-          .catch(x => this.showErrorMessage(x));
-        return;
-
-      case DocumentItemType.document:
-        this.retrievalService.getDocument(this.itemUID)
-          .then(x => this.setDocument(x))
-          .catch(x => this.showErrorMessage(x));
-        return;
-
-      default:
-        return;
-    }
+    this.retrievalService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash)
+                         .then(x => this.setDocument(x))
+                         .catch(x => this.showErrorMessage(x));
   }
+
 
   public clearForm(): void {
     this.selectedDocumentItemType = 0;
@@ -166,7 +136,7 @@ export class SearchForm implements OnInit {
         break;
 
       case DocumentItemType.transaction:
-        if (this.itemUID.length !== 14) {
+        if (this.itemUID.length !== 14 && this.itemUID.length !== 16) {
           this.showValidatePatternsError();
           return false;
         }
@@ -192,6 +162,7 @@ export class SearchForm implements OnInit {
 
     return true;
   }
+
 
   private showValidatePatternsError(): void {
     this.hasError = true;

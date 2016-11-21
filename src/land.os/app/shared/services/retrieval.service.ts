@@ -5,13 +5,16 @@ import 'rxjs/add/operator/toPromise';
 
 import { PropertyItem } from './propertyItem';
 
+export enum DocumentItemType {
+  empty = 0,
+  resource = 1,
+  transaction = 2,
+  certificate = 4,
+  document = 8
+}
+
 @Injectable()
 export class RetrievalService {
-
-  private urlResources = 'v1/online-services/resources/';
-  private urlTransaction = 'v1/online-services/transactions/';
-  private urlCertificate = 'v1/online-services/certificates/';
-  private urlDocument = 'v1/online-services/documents/';
 
   constructor(private http: Http) {
 
@@ -19,34 +22,20 @@ export class RetrievalService {
 
   // region Public methods
 
-  public getItem(itemType: string, itemUID: string, itemHash: string): Promise<PropertyItem[]> {
-    return this.getPropertyItems(this.urlCertificate, itemUID);
-  }
+  public getDocument(documentType: DocumentItemType, uid: string, hashcode: string): Promise<PropertyItem[]> {
+    const endpoint = this.getServiceEndpoint(documentType);
 
-  public getCertificate(certificateUID: string): Promise<PropertyItem[]> {
-    return this.getPropertyItems(this.urlCertificate, certificateUID);
-  }
-
-  public getTransaction(transactionUID:string): Promise<PropertyItem[]> {
-    return this.getPropertyItems(this.urlTransaction, transactionUID);
-  }
-
-  public getResources(resourceUID: string): Promise<PropertyItem[]> {
-    return this.getPropertyItems(this.urlResources, resourceUID);
-  }
-
-  public getDocument(documentUID:string): Promise<PropertyItem[]> {
-    return this.getPropertyItems(this.urlDocument, documentUID);
+    return this.getPropertyItems(endpoint, uid,  hashcode);
   }
 
   // endregion Public methods
 
-  // region Public methods
+  // region Private methods
 
-  private getPropertyItems(endpoint: string, uid:string): Promise<PropertyItem[]> {
+  private getPropertyItems(endpoint: string, uid:string, hashcode: string): Promise<PropertyItem[]> {
     const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services/';
 
-    let url = servicesServer + endpoint + uid;  // + '?hash=12345';
+    let url = servicesServer + endpoint + uid + (hashcode ? '?hash=' + hashcode : '');
 
     return this.http.get(url)
       .toPromise()
@@ -54,10 +43,31 @@ export class RetrievalService {
       .catch(this.handleError);
   }
 
+  private getServiceEndpoint(documentType: DocumentItemType): string {
+    switch (documentType) {
+
+      case DocumentItemType.resource:
+        return 'v1/online-services/resources/';
+
+      case DocumentItemType.transaction:
+        return 'v1/online-services/transactions/';
+
+      case DocumentItemType.certificate:
+        return 'v1/online-services/certificates/';
+
+      case DocumentItemType.document:
+        return 'v1/online-services/documents/';
+
+      default:
+         throw 'Invalid document type';
+    }
+
+  }
+
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.json().data || error.message);
   }
 
-  // endregion Public methods
+  // endregion Private methods
 
 }
