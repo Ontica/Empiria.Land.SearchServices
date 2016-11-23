@@ -80,8 +80,8 @@
 				<div class="columns medium-3 large-2 large-offset-1 show-for-medium">
 					<label class='left-indented'>{{documentItem.name}}:</label>
 				</div>
-				<div class="columns medium-9 large-9">
-					<div [ngClass]="'label-value ' + documentItem.style">{{documentItem.value}}</div>
+				<div class="columns medium-9 large-8 large-pull-1">
+					<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
 				</div>
 			</div>
 		</div>

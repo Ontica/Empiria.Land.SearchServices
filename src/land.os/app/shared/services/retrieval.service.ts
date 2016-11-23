@@ -33,6 +33,7 @@ export class RetrievalService {
   // region Private methods
 
   private getPropertyItems(endpoint: string, uid:string, hashcode: string): Promise<PropertyItem[]> {
+    //const servicesServer = 'http://empiria.land/web.api/';
     const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services/';
 
     let url = servicesServer + endpoint + uid + (hashcode ? '?hash=' + hashcode : '');

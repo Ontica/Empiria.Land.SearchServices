@@ -187,12 +187,25 @@ input {
   color: darkred;
 }
 
-.ok-status-text {
+.ok-status-text, .ok-status-text div, b {
   color: green;
+}
+
+a, a:hover, a:visited {
+  text-decoration: underline;
+}
+
+.in-process-status-text {
+  color: rebeccapurple;
+  font-weight: 600;
 }
 
 .mono-space-text {
   font-family: Courier New, Courier, monospace;
+}
+
+.small-text {
+  font-size: 0.8em;
 }
 
 .enhanced-text {
