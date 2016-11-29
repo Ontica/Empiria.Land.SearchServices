@@ -3,7 +3,7 @@
 Empiria Land Search Services is an e-government portal used to search documents and information,
 concerning with the Recorder of Lands office.
 
-This project is based on Angular 2.0 RC-4 and TypeScript 2.0 Beta.
+This project is based on Angular 2.0 and TypeScript 2.0.
 
 # How to start
 

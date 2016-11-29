@@ -1,14 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="es-MX">
-
 <head>
 	<base href="<%= APP_BASE %>">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Dirección de Notarías y Registros Públicos | Gobierno del Estado de Tlaxcala</title>
+	<title><%= APP_TITLE %></title>
 	<meta name="description" content="Dirección de Notarías y Registros Públicos. Registro Público de la Propiedad. Gobierno del Estado de Tlaxcala.">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
 	<link rel="stylesheet" href="assets/css/loading.page.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css">
@@ -39,38 +38,33 @@
 
 	</empiria-land>
 
-	<script>
+  <script>
   // Fixes undefined module function in SystemJS bundle
   function module() {}
   </script>
 
-	<!-- shims:js -->
-	<!-- endinject -->
+  <!-- shims:js -->
+  <!-- endinject -->
 
-	<% if (ENV === 'dev') { %>
-		<script>
-    System.config(<%=
-      JSON.stringify(SYSTEM_CONFIG, null, 2)
-    %>)
-  </script>
-		<% } %>
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script src="<%= APP_BASE %>app/system-config.js"></script>
+  <% } %>
 
-			<!-- libs:js -->
-			<!-- endinject -->
+  <!-- libs:js -->
+  <!-- endinject -->
 
-			<!-- inject:js -->
-			<!-- endinject -->
+  <!-- inject:js -->
+  <!-- endinject -->
 
-			<% if (ENV === 'dev') { %>
-				<script>
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
-      console.error(e,
-          'Report this error at https://github.com/Ontica/Empiria.Land.SearchServices/issues');
+      console.error(e.stack || e,
+        'Please report this error at https://github.com/Ontica/Empiria.Land.SearchServices/issues');
     });
   </script>
-				<% } %>
+  <% } %>
 
 </body>
-
 </html>
