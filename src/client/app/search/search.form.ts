@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RetrievalService, DocumentItemType } from '../shared/services/retrieval.service';
+import { RetrievalService, DocumentItemType } from '../shared/index';
 
 import { PropertyItem } from '../shared/services/propertyItem';
 import 'rxjs/Rx';
@@ -34,7 +34,7 @@ export class SearchForm implements OnInit {
 
 
   ngOnInit() {
-    this.subscription = this.router.routerState.queryParams.subscribe(params => {
+    this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
       let docType = params['type'] || 'empty';
       this.selectedDocumentItemType = (<any> DocumentItemType)[docType];
       this.itemUID = params['uid'] || '';

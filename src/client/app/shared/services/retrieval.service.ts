@@ -13,6 +13,7 @@ export enum DocumentItemType {
   document = 8
 }
 
+
 @Injectable()
 export class RetrievalService {
 

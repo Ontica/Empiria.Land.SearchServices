@@ -6,6 +6,7 @@
  *  Copyright (c) 2015-2016. Ontica LLC, La Vía Óntica SC and contributors. <http://ontica.org>
 */
 
+/*
 import {Settings, SettingsData} from 'empiria';
 import {Session} from 'empiria';
 import {DataOperationDef} from 'empiria';
@@ -43,3 +44,5 @@ export function initializeTestEnvironment() {
   Settings.set(APP_SETTINGS);
   Session.setCurrent(TEST_SESSION_TOKEN);
 }
+
+*/

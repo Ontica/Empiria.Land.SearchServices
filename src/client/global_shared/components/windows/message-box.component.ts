@@ -5,8 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   selector: 'message-box',
  // outputs: ['onClose'],
   templateUrl: 'message-box.component.html',
-  styleUrls : ['message-box.component.css'],
-  directives: []
+  styleUrls : ['message-box.component.css']
 })
 export class MessageBoxComponent {
 

@@ -6,8 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   //inputs: ['visible'],
  // outputs: ['onClose'],
   templateUrl: 'modal-window.component.html',
-  styleUrls: ['modal-window.component.css'],
-  directives: []
+  styleUrls: ['modal-window.component.css']
 })
 export class ModalWindowComponent {
 
