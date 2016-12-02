@@ -1,10 +1,39 @@
 {
-  "name": "angular-seed",
-  "version": "0.0.0",
-  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "name": "empiria-land-search-services",
+  "author": "La Vía Óntica SC || Ontica LLC",
+  "version": "0.5.0",
+  "description": "Empiria Land - Servicios de consultas en línea",
+  "license": "AGPL-3.0",
+  "homepage": "http://ontica.org",
+  "private": true,
   "repository": {
-    "url": "https://github.com/mgechev/angular-seed"
+    "type": "git",
+    "url": "https://github.com/Ontica/Empiria.Land.SearchServices"
   },
+  "contributors": [
+    "Christian Yáñez <cyanez@ontica.org>",
+    "José Manuel Cota  <jmcota@ontica.org>"
+  ],
+  "keywords": [
+    "Empiria",
+    "Land",
+    "registro público",
+    "catastro",
+    "servicios en línea",
+    "gobierno electrónico",
+    "administración territorial",
+    "tenencia de la tierra",
+    "doing business",
+    "sedatu",
+    "land recording system",
+    "e-government",
+    "e-gobierno",
+    "notarías",
+    "Infonavit",
+    "México",
+    "Tlaxcala",
+    "Zacatecas"
+  ],
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
     "build.dev.watch": "gulp build.dev.watch --color",
@@ -39,8 +68,6 @@
     "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "node_modules/.bin/compodoc -s"
   },
-  "author": "Minko Gechev <mgechev>",
-  "license": "MIT",
   "devDependencies": {
     "@angular/compiler-cli": "~2.2.3",
     "@angular/platform-server": "~2.2.3",
