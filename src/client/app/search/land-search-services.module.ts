@@ -4,12 +4,12 @@ import { SearchForm } from './search.form';
 import { SearchServicesRoutingModule } from './search.routes';
 
 import { SharedModule } from './../shared/shared.module';
-import { RetrievalService } from './../shared/services/retrieval.service';
+import { DataService } from './../shared/services/data.service';
 
 @NgModule({
   imports: [CommonModule, SearchServicesRoutingModule, SharedModule],
   declarations: [SearchForm],
   exports: [SearchForm],
-  providers: [RetrievalService]
+  providers: [DataService]
 })
 export class LandSearchServicesModule { }

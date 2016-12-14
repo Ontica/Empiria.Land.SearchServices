@@ -13,14 +13,13 @@
 				<div class="row">
 					<div class="columns text-center">
 						<label for="searchBox">¿Qué desea consultar o verificar?</label>
-												<input style='width:308px;margin:auto' type="text" [ngModel]="selectedDocumentItemType" name='cboDocumentItemType'>
+						<!--<input style='width:308px;margin:auto' type="text" [ngModel]="selectedDocumentItemType" name='cboDocumentItemType'>-->
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="columns">
-						<select id="searchBox" #selectBox style='width:308px' [ngModel]="selectedDocumentItemType" name='cboDocumentItemType'
-							(change)="setDocumentItem(selectBox.value)">
+						<select id="searchBox" #selectBox style='width:308px' [ngModel]="selectedDocumentItemType" name='cboDocumentItemType' (change)="setDocumentItem(selectBox.value)">
 							<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
 							<option value="{{DocumentItemType.certificate}}">Un certificado</option>
 							<option value="{{DocumentItemType.document}}">Un documento inscrito (sello registral)</option>

@@ -5,5 +5,7 @@
     "**/coverage_js": true,
     "**/coverage": true,
     "**/dist": true
-  }
+  },
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2
 }

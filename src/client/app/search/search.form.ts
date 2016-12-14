@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RetrievalService, DocumentItemType } from '../shared/index';
-
+import { SearchService, DocumentItemType } from './search.service';
 import { PropertyItem } from '../shared/services/propertyItem';
 import 'rxjs/Rx';
 
@@ -12,7 +11,7 @@ import 'rxjs/Rx';
   selector: 'search-form',
   templateUrl: 'search.form.html',
 
-  providers: [RetrievalService]
+  providers: [SearchService]
 })
 
 export class SearchForm implements OnInit {
@@ -28,7 +27,7 @@ export class SearchForm implements OnInit {
   private subscription: any;
 
 
-  constructor(private retrievalService: RetrievalService, private router: Router) {
+  constructor(private router: Router, private searchService: SearchService) {
 
   }
 
@@ -36,7 +35,7 @@ export class SearchForm implements OnInit {
   ngOnInit() {
     this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
       let docType = params['type'] || 'empty';
-      this.selectedDocumentItemType = (<any> DocumentItemType)[docType];
+      this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
       this.itemUID = params['uid'] || '';
       this.itemHash = params['hash'] || undefined;
       this.selectedDocumentItemName = this.getSelectedItemName();
@@ -83,9 +82,10 @@ export class SearchForm implements OnInit {
       return;
     }
 
-    this.retrievalService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash)
-                         .then(x => this.setDocument(x))
-                         .catch(x => this.showErrorMessage(x));
+    this.searchService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash)
+      .then(x => this.setDocument(x))
+      .catch(x => this.showErrorMessage(x));
+
   }
 
 
@@ -101,7 +101,7 @@ export class SearchForm implements OnInit {
 
   private showErrorMessage(error: any): void {
     this.hasError = true;
-    this.errorMessage = (<string> error.errorMessage).replace(/\n/g, '<br />');
+    this.errorMessage = (<string>error.errorMessage).replace(/\n/g, '<br />');
   }
 
 
@@ -167,7 +167,8 @@ export class SearchForm implements OnInit {
   private showValidatePatternsError(): void {
     this.hasError = true;
     this.errorMessage = 'El ' + this.selectedDocumentItemName.toLowerCase() +
-                        ' no tiene un formato correcto. Favor de revisarlo e intentarlo nuevamente.';
+      ' no tiene un formato correcto. Favor de revisarlo e intentarlo nuevamente.';
   }
+
 
 }  // class SearchForm
