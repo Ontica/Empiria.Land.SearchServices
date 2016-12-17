@@ -6,43 +6,34 @@
  *  Copyright (c) 2015-2016. Ontica LLC, La Vía Óntica SC and contributors. <http://ontica.org>
 */
 
-/*
-import {Settings, SettingsData} from 'empiria';
-import {Session} from 'empiria';
-import {DataOperationDef} from 'empiria';
 
+import { DataOperationDef } from './shared/services/data.operation';
 
-const TESTS_SERVER = 'http://land/api/';
+const DefaultDataServer = 'http://registropublico.tlaxcala.gob.mx/services/';
 
-const TESTS_API_KEY = 'Tr4d3fGZUTzp7pRdUHWTQVcB6TWpLaATAwDPeYzX9yV8eYTNxCe5rsL9dZwererx';
-
-const DATA_OPERATIONS: DataOperationDef[] = [
+const DataOperationList: DataOperationDef[] = [
   {
-    'uid': 'System.GetLicense',
-    'url': 'v1/system/license',
-    'method': 'GET'
+    uid: 'getResource', url: 'v1/online-services/resources/{0}?hash={1}', method: 'get',
+    description: '', typeName: '', typeOperation: ''
   },
   {
-    'uid': 'System.GetEndpoints',
-    'url': 'v1/system/api-endpoints',
-    'method': 'GET'
+    uid: 'getTransaction', url: 'v1/online-services/transactions/{0}?hash={1}', method: 'get',
+    description: '', typeName: '', typeOperation: ''
+  },
+  {
+    uid: 'getCerficate', url: 'v1/online-services/certificates/{0}?hash={1}', method: 'get',
+    description: '', typeName: '', typeOperation: ''
+  },
+  {
+    uid: 'getDocument', url: 'v1/online-services/documents/{0}?[hash={1}]', method: 'get',
+    description: '', typeName: '', typeOperation: ''
   }
-];   // END
 
+];
 
-const APP_SETTINGS: SettingsData = {
-  'defaultServer': TESTS_SERVER,
-  'apiKey': TESTS_API_KEY,
-  'dataOperations': DATA_OPERATIONS
+export const APP_SETTINGS = {
+  'defaultDataServer': DefaultDataServer,
+  'apiKey': '5psEHmJ4hAF78F4GTFZmifMPHzPTFqNAF32bgz3nZyiW1csLHfVOlvrQU6yplbNO',
+  'initialOperations': DataOperationList
 };
 
-const TEST_SESSION_TOKEN = '2a3b02e6-9d59-41de-8698-6482ec4e9ce2-' +
-                           '3a951dab66a2360fa08564bf39b24b7d7e6a92e2ba86813cb24afc84cde2e572';
-
-
-export function initializeTestEnvironment() {
-  Settings.set(APP_SETTINGS);
-  Session.setCurrent(TEST_SESSION_TOKEN);
-}
-
-*/

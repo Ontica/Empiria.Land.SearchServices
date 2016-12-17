@@ -1,4 +1,5 @@
 import { DataOperationDef } from './data.operation';
+import { APP_SETTINGS } from './../../empiria.config';
 
 export class DataSettingsDef {
 
@@ -7,28 +8,6 @@ export class DataSettingsDef {
   dataOperations: DataOperationDef[];
 
 }
-
-const servicesServer = 'http://registropublico.tlaxcala.gob.mx/services/';
-
-const OperationList: DataOperationDef[] = [
-  {
-    uid: 'getResource', url: 'v1/online-services/resources/{0}?hash={1}', method: 'get',
-    description: '', typeName: '', typeOperation: ''
-  },
-  {
-    uid: 'getTransaction', url: 'v1/online-services/transactions/{0}?hash={1}', method: 'get',
-    description: '', typeName: '', typeOperation: ''
-  },
-  {
-    uid: 'getCerficate', url: 'v1/online-services/certificates/{0}?hash={1}', method: 'get',
-    description: '', typeName: '', typeOperation: ''
-  },
-  {
-    uid: 'getDocument', url: 'v1/online-services/documents/{0}?[hash={1}]', method: 'get',
-    description: '', typeName: '', typeOperation: ''
-  }
-
-];
 
 export class DataSettings {
 
@@ -57,9 +36,9 @@ export class DataSettings {
   }
 
   private setInitialValues() {
-    this.settings.defaultServer = servicesServer;
-    this.settings.apiKey = '';
-    this.settings.dataOperations = OperationList;
+    this.settings.defaultServer = APP_SETTINGS.defaultDataServer;
+    this.settings.apiKey = APP_SETTINGS.apiKey;
+    this.settings.dataOperations = APP_SETTINGS.initialOperations;
 
   }
 

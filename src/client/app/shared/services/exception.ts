@@ -7,13 +7,13 @@
 */
 
 export interface ExceptionData {
-   message: string;
-   code?: string;
-   name?: string;
-   hint?: string;
-   source?: string;
-   issues?: string[];
-   innerException?: any;
+  message: string;
+  code?: string;
+  name?: string;
+  hint?: string;
+  source?: string;
+  issues?: string[];
+  innerException?: any;
 }
 
 export class Exception extends Error {
@@ -24,6 +24,19 @@ export class Exception extends Error {
   private _trace: string = '';
   private _issues: string[] = [];
   private _innerException: any = {};
+
+  public static throw(data: string | ExceptionData): void {
+    let exception: Exception;
+
+    if (typeof data === 'string') {
+      exception = new Exception({ message: <string>data });
+    } else {
+      exception = new Exception(<ExceptionData>data);
+    }
+    console.log('There was a problem: ' + exception.message + '\n' + exception.toString());
+
+    throw exception;
+  }
 
   constructor(data: ExceptionData) {
     super(data.message);
@@ -36,21 +49,8 @@ export class Exception extends Error {
     this._innerException = data.innerException || {};
 
     super.message = data.message;   // Assign because there are ES6 issues yet
-                                    // look at: https://github.com/Microsoft/TypeScript/issues/5069
-                                    //          https://github.com/Microsoft/TypeScript/issues/1168
-  }
-
-  public static throw(data: string | ExceptionData): void {
-    let exception: Exception;
-
-    if (typeof data === 'string') {
-      exception = new Exception({message: <string> data});
-    } else {
-      exception = new Exception(<ExceptionData> data);
-    }
-    console.log('There was a problem: ' + exception.message + '\n' + exception.toString());
-
-    throw exception;
+    // look at: https://github.com/Microsoft/TypeScript/issues/5069
+    //          https://github.com/Microsoft/TypeScript/issues/1168
   }
 
   public get code(): string {
@@ -80,10 +80,10 @@ export class Exception extends Error {
   // Override of the toString method, in order to return a specific message.
   public toString(): string {
     let template = '  Code: {0}  Name: {1}  Source: {2}  Message: {3}  Hint: {4}' +
-                   '  Issues: {5}  InnerException: {6}  Trace: {7}';
+      '  Issues: {5}  InnerException: {6}  Trace: {7}';
 
     let parameters = [this.code, this.name, this.source, this.message, this.hint,
-                      this.issues.toString(), JSON.stringify(this._innerException), this.trace];
+    this.issues.toString(), JSON.stringify(this._innerException), this.trace];
 
     for (let i = 0; i < parameters.length; i++) {
       template = template.replace('{' + i.toString() + '}', parameters[i].trim() + '\n');

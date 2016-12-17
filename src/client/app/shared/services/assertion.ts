@@ -6,8 +6,8 @@
  *  Copyright (c) 2015-2016. Ontica LLC, La Vía Óntica SC and contributors. <http://ontica.org>
 */
 
-import {Exception} from './exception';
-import {Validate} from  './validate';
+import { Exception } from './exception';
+import { Validate } from  './validate';
 
 /** Static type that allows assertion checking.
   *
