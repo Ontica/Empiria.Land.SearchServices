@@ -15,8 +15,8 @@ export class HttpDataService {
   // region Public methods
 
   public getList<T>(dataOperation: DataOperation): Promise<T> {
+    let url = dataOperation.getURI();
 
-    let url = dataOperation.getUrl();
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as T)

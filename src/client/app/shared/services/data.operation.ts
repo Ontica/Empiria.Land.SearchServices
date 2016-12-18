@@ -1,94 +1,101 @@
-export class DataOperationDef {
-  uid: string = '';
-  url: string = '';
-  method: string = '';
-  description?: string = '';
-  typeName?: string = '';
-  typeOperation: string = '';
-
-  public static parse(uid: string): DataOperationDef {
-    let dataDefinition = new DataOperationDef();
-
-    dataDefinition.uid = uid;
-    return dataDefinition;
-  }
-}
-
 import { DataSettings } from './data.settings';
+import { Assertion } from './assertion';
+
+export interface DataOperationDef {
+  uid: string;
+  url: string;
+  method: string;
+  description?: string;
+  typeName?: string;
+  typeOperation: string;
+
+}
 
 export class DataOperation {
 
+  private static DEFINED_OPERATIONS: DataOperationDef[];
+
   private definition: DataOperationDef;
-  private operations: DataOperationDef[];
+  private parsedURI: string = '';
 
+  // region Constructors and parsers 
 
+  private constructor(definition: DataOperationDef, parameters: any[]) {
+    this.definition = definition;
+    this.parsedURI = DataOperation.getParsedURI(this.definition, parameters);
+  }
+
+  public static parse(dataOperationUID: string, ...parameters: any[]): DataOperation {
+    Assertion.assertValue(dataOperationUID, 'dataOperationUID');
+
+    let definition = DataOperation.parseDataOperationDef(dataOperationUID);
+
+    return new DataOperation(definition, parameters);
+  }
+
+  private static parseDataOperationDef(dataOperationUID: string): DataOperationDef {
+    DataOperation.assertDEFINED_OPERATIONSLoaded();
+
+    let foundedItems = DataOperation.DEFINED_OPERATIONS.filter((x) => x.uid === dataOperationUID);
+
+    if (foundedItems.length === 0) {
+      throw 'DataOperation ' + dataOperationUID + ' is undefined.';
+    }
+
+    return foundedItems[0];
+  }
+
+  private static assertDEFINED_OPERATIONSLoaded(): void {
+    if (!DataOperation.DEFINED_OPERATIONS) {
+      DataOperation.DEFINED_OPERATIONS = DataSettings.getOperations();
+    }
+  }
+
+  // endregion Constructors and parsers
 
   // region Public methods
 
-  public static parse(dataOperationUID: string, ...parameters: any[]): DataOperation {
-    let dataOperation = new DataOperation(dataOperationUID);
 
-    dataOperation.loadParameters(parameters);
+  public getURI(): string {
+    let servicesServer = DataSettings.getDefaultServer();
 
-    return dataOperation;
-  }
-
-  public getUrl(): string {
-    return this.definition.url;
+    return servicesServer + this.parsedURI;
   }
 
   // endregion Public methods
 
-  // region Private methods
+  // region Auxiliary methods
 
-  private constructor(dataOperationUID: string) {
-    this.definition = DataOperationDef.parse(dataOperationUID);
-    this.operations = DataSettings.getOperations();
+  private static getParsedURI(definition: DataOperationDef, parameters: any[]): string {
+    parameters = parameters || [];
 
-  }
-
-  private loadParameters(parameters: any[]): void {
-
-    const servicesServer = DataSettings.getServer();
-    let uidSettings = this.getUidSettings();
-
-    this.definition.url = servicesServer + uidSettings.url;
-    this.definition.method = uidSettings.method;
-    this.definition.description = uidSettings.description;
-    this.definition.typeName = uidSettings.typeName;
-    this.definition.typeOperation = uidSettings.typeOperation;
+    let url = definition.url;
 
     for (let i = 0; i < parameters.length; i++) {
-      this.definition.url = this.definition.url.replace('{' + i.toString() + '}', parameters[i]);
+      url = url.replace('{' + i.toString() + '}', parameters[i]);
     }
-    this.formatParameters();
 
+    url = DataOperation.formatParameters(url);
+
+    return url;
   }
 
-  private formatParameters(): void {
+  private static formatParameters(url: string): string {
     //replace []
-    this.definition.url = this.definition.url.replace(new RegExp('(\\[)|(\\])', 'g'), '');
-    //replace parameter=null or paramater={number}
-    this.definition.url = this.definition.url.
+    url = url.replace(new RegExp('(\\[)|(\\])', 'g'), '');
+    //replace parameter=null or paramater={number} or parameter=undefined
+    url = url.
       replace(new RegExp('([A-Za-z0-9\-]+=((undefined)|(null)|({[0-9]})))', 'g'), '');
     //replace && &&& &...&&&
-    this.definition.url = this.definition.url.replace(new RegExp('(&)\\1+', 'g'), '&');
-
-    this.definition.url = this.definition.url.replace(new RegExp('\\?&'), '?');
+    url = url.replace(new RegExp('(&)\\1+', 'g'), '&');
+    //replace &?
+    url = url.replace(new RegExp('\\?&'), '?');
     //replace ? at end or & at end
-    this.definition.url = this.definition.url.replace(new RegExp('(\\?$)|(&$)'), '');
+    url = url.replace(new RegExp('(\\?$)|(&$)'), '');
 
+    return url;
   }
 
-  private getUidSettings(): DataOperationDef {
-    let operationSettings = this.operations.filter((x) => x.uid === this.definition.uid);
-    if (operationSettings.length < 0) {
-      throw 'Operation is undefined';
-    }
-    return operationSettings[0];
-  }
-
-  // endregion Private methods
+  // endregion Auxiliary methods
 
 }
-
