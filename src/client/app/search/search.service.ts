@@ -24,7 +24,7 @@ export class SearchService {
 
   public getDocument(documentType: DocumentItemType, uid: string, hashcode: string):
   Promise<PropertyItem[]> {
-    let dataOperationUID = this.getOpertionName(documentType);
+    let dataOperationUID = this.getOperationName(documentType);
     let dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode);
     return this.dataService.getList<PropertyItem[]>(dataOperation);
   }
@@ -33,7 +33,7 @@ export class SearchService {
 
   // region Private methods
 
-  private getOpertionName(documentType: DocumentItemType): string {
+  private getOperationName(documentType: DocumentItemType): string {
     switch (documentType) {
 
       case DocumentItemType.resource:
@@ -43,7 +43,7 @@ export class SearchService {
         return 'getTransaction';
 
       case DocumentItemType.certificate:
-        return 'getCerficate';
+        return 'getCertificate';
 
       case DocumentItemType.document:
         return 'getDocument';

@@ -21,7 +21,7 @@ const DataOperationList: DataOperationDef[] = [
     description: '', typeName: '', typeOperation: ''
   },
   {
-    uid: 'getCerficate', url: 'v1/online-services/certificates/{0}?hash={1}', method: 'get',
+    uid: 'getCertificate', url: 'v1/online-services/certificates/{0}?hash={1}', method: 'get',
     description: '', typeName: '', typeOperation: ''
   },
   {
@@ -36,4 +36,3 @@ export const APP_SETTINGS = {
   'apiKey': '5psEHmJ4hAF78F4GTFZmifMPHzPTFqNAF32bgz3nZyiW1csLHfVOlvrQU6yplbNO',
   'initialOperations': DataOperationList
 };
-
