@@ -1,0 +1,84 @@
+<form>
+	<div class="row contenedor-transparencia">
+		<div class="small-12 small-centered text-center columns">
+
+      <div class="row">
+        <div class="columns" style='padding-top:1.0em'>
+          <div class='mainTitle'>Escanee el código de barras o QR de su documento o predio</div>
+        </div>
+      </div>
+
+			<fieldset>
+
+				<div class="row">
+					<div class="columns small-12 small-centered">
+            <input id="txtSearchText" name='txtSearchText' type="text" [(ngModel)]="searchText"
+                   style='width:308px;margin:auto' autofocus='true' autocomplete='off'
+                   placeholder="Escanee el código de su documento" onblur='this.focus();'
+                   (keydown.enter)="onsearch()">
+					</div>
+				</div>
+
+			</fieldset>
+
+<!--
+      <div class="row small-collapse">
+        <div class="columns hide-for-medium">
+          <label class='small-label'>Tipo de documento:</label>
+        </div>
+        <div class="columns medium-3 large-2 large-offset-1 show-for-medium">
+          <label class='left-indented'>Tipo de documento:</label>
+        </div>
+        <div class="columns medium-9 large-8 large-pull-1">
+          <div [ngClass]="label-value">Certificado</div>
+        </div>
+      </div>
+!-->
+
+		</div>
+	</div>
+</form>
+
+<div *ngIf="document.length !== 0 || errorMessage.length != 0">&nbsp;</div>
+
+<div class="row small-collapse contenedor-transparencia" *ngIf="document.length !== 0">
+	<div class="columns small-12 small-centered">
+		<div class="row small-collapse" *ngFor="let documentItem of document">
+
+			<div *ngIf="documentItem.style === 'new-section'">
+				<div class="columns medium-12 large-10 small-centered">
+					<div>&nbsp;</div>
+					<div class="new-section">{{documentItem.name}}</div>
+				</div>
+			</div>
+
+			<div *ngIf="documentItem.style !== 'new-section'">
+				<div class="columns hide-for-medium">
+					<label class='small-label'>{{documentItem.name}}</label>
+				</div>
+				<div class="columns medium-3 large-2 large-offset-1 show-for-medium">
+					<label class='left-indented'>{{documentItem.name}}:</label>
+				</div>
+				<div class="columns medium-9 large-8 large-pull-1">
+					<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row small-collapse contenedor-rojo" *ngIf="errorMessage.length !== 0">
+
+	<div class="columns small-12 small-centered">
+
+		<div class="row small-collapse">
+			<div style="background-color:FireBrick;color:white;padding:0.5em">Ocurrió un problema</div>
+		</div>
+
+		<div class="row small-collapse" style='padding:1.0em' [innerHtml]="errorMessage">
+
+		</div>
+
+	</div>
+
+</div>

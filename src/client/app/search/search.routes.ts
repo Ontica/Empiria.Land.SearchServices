@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SearchForm } from './search.form';
+import { SearchForm, SearchKioskForm } from './index';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', component: SearchForm, pathMatch: 'full' }
+      { path: '', component: SearchForm, pathMatch: 'full' },
+      { path: 'quiosco', component: SearchKioskForm }
     ])
   ],
   exports: [RouterModule]
