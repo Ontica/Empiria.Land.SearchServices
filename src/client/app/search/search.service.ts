@@ -26,6 +26,7 @@ export class SearchService {
   Promise<PropertyItem[]> {
     let dataOperationUID = this.getOperationName(documentType);
     let dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode);
+
     return this.dataService.getList<PropertyItem[]>(dataOperation);
   }
 
