@@ -129,7 +129,7 @@ export class SearchForm implements OnInit {
   private validatePatterns(): boolean {
     switch (this.selectedDocumentItemType) {
       case DocumentItemType.resource:
-        if (this.itemUID.length !== 19) {
+        if (this.itemUID.length !== 19 && this.itemUID.length !== 14) {
           this.showValidatePatternsError();
           return false;
         }
