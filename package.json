@@ -1,7 +1,7 @@
 {
   "name": "empiria-land-search-services",
   "author": "La Vía Óntica SC || Ontica LLC",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Empiria Land - Servicios de consultas en línea",
   "license": "AGPL-3.0",
   "homepage": "http://ontica.org",
@@ -12,7 +12,7 @@
   },
   "contributors": [
     "Christian Yáñez <cyanez@ontica.org>",
-    "José Manuel Cota  <jmcota@ontica.org>"
+    "José Manuel Cota <jmcota@ontica.org>"
   ],
   "keywords": [
     "Empiria",
