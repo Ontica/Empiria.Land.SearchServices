@@ -71,4 +71,4 @@ npm tests
 GNU AFFERO GENERAL PUBLIC LICENSE
 
 #
-Copyright (C) 2016-2017. La Vía Óntica SC, Ontica LLC and contributors.
+Copyright (C) 2016-2018. La Vía Óntica SC, Ontica LLC and contributors.

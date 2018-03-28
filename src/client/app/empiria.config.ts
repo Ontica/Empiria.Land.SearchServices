@@ -34,5 +34,6 @@ const DataOperationList: DataOperationDef[] = [
 export const APP_SETTINGS = {
   'defaultDataServer': DefaultDataServer,
   'apiKey': '5psEHmJ4hAF78F4GTFZmifMPHzPTFqNAF32bgz3nZyiW1csLHfVOlvrQU6yplbNO',
-  'initialOperations': DataOperationList
+  'initialOperations': DataOperationList,
+  'displayVedaElectoralUI': true
 };
