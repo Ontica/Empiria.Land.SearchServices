@@ -18,7 +18,7 @@ export class SearchForm implements OnInit {
 
   public DocumentItemType = DocumentItemType;
   public selectedDocumentItemType = 0;
-  public selectedDocumentItemName = 'Buscar';
+  public selectedDocumentItemName = 'Consultar';
   public document: PropertyItem[];
   public itemUID = '';
   public itemHash = '';
@@ -54,7 +54,7 @@ export class SearchForm implements OnInit {
   public getSelectedItemName(): string {
     switch (this.selectedDocumentItemType) {
       case DocumentItemType.empty:
-        return 'Buscar';
+        return 'Consultar';
 
       case DocumentItemType.resource:
         return 'Folio real';

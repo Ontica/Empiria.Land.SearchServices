@@ -9,7 +9,8 @@
 
 import { DataOperationDef } from './shared/services/data.operation';
 
-const DefaultDataServer = 'http://registropublico.tlaxcala.gob.mx/services/';
+const DefaultDataServer = 'https://registropublico.tlaxcala.gob.mx/services/';
+// const DefaultDataServer = 'http://empiria.land/web.api/';
 
 const DataOperationList: DataOperationDef[] = [
   {
@@ -35,5 +36,5 @@ export const APP_SETTINGS = {
   'defaultDataServer': DefaultDataServer,
   'apiKey': '5psEHmJ4hAF78F4GTFZmifMPHzPTFqNAF32bgz3nZyiW1csLHfVOlvrQU6yplbNO',
   'initialOperations': DataOperationList,
-  'displayVedaElectoralUI': true
+  'displayVedaElectoralUI': false
 };

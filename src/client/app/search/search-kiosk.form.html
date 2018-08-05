@@ -21,21 +21,7 @@
 
 			</fieldset>
 
-<!--
-      <div class="row small-collapse">
-        <div class="columns hide-for-medium">
-          <label class='small-label'>Tipo de documento:</label>
-        </div>
-        <div class="columns medium-3 large-2 large-offset-1 show-for-medium">
-          <label class='left-indented'>Tipo de documento:</label>
-        </div>
-        <div class="columns medium-9 large-8 large-pull-1">
-          <div [ngClass]="label-value">Certificado</div>
-        </div>
-      </div>
-!-->
-
-		</div>
+  	</div>
 	</div>
 </form>
 
@@ -45,14 +31,14 @@
 	<div class="columns small-12 small-centered">
 		<div class="row small-collapse" *ngFor="let documentItem of document">
 
-			<div *ngIf="documentItem.style === 'new-section'">
+			<div *ngIf="documentItem.style.startsWith('section')">
 				<div class="columns medium-12 large-10 small-centered">
 					<div>&nbsp;</div>
-					<div class="new-section">{{documentItem.name}}</div>
+					<div [ngClass]="documentItem.style">{{documentItem.name}}</div>
 				</div>
 			</div>
 
-			<div *ngIf="documentItem.style !== 'new-section'">
+			<div *ngIf="!documentItem.style.startsWith('section')">
 				<div class="columns hide-for-medium">
 					<label class='small-label'>{{documentItem.name}}</label>
 				</div>
@@ -62,7 +48,8 @@
 				<div class="columns medium-9 large-8 large-pull-1">
 					<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
 				</div>
-			</div>
+      </div>
+
 		</div>
 	</div>
 </div>
@@ -72,7 +59,7 @@
 	<div class="columns small-12 small-centered">
 
 		<div class="row small-collapse">
-			<div style="background-color:FireBrick;color:white;padding:0.5em">Ocurrió un problema</div>
+			<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
 		</div>
 
 		<div class="row small-collapse" style='padding:1.0em' [innerHtml]="errorMessage">

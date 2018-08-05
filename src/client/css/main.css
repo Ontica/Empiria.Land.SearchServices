@@ -156,24 +156,26 @@ input {
   font-weight: bold;
 }
 
-.new-error-section {
-  color: white;
-  background-color: red;
-  line-height: 2em;
-  font-weight: 600;
-}
-
-.new-section {
+.section {
   color: white;
   background-color: #306d4e;
-  font-weight: 600;
   padding: 0.25em;
   padding-left: 0.75em;
   border-radius: 0 0 6px 0;
 }
 
+.section-error {
+  color: white;
+  background-color: darkred;
+  padding: 0.25em;
+  padding-left: 0.75em;
+  border-radius: 0 0 6px 0;
+}
+
+
 .warning-status-text {
   color: darkred;
+  font-weight: 600;
 }
 
 .ok-status-text {
