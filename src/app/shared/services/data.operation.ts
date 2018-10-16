@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
+ *
+ * See LICENSE.txt in the project root for complete license information.
+ */
+
 import { DataSettings } from './data.settings';
 import { Assertion } from './assertion';
 
@@ -18,7 +25,7 @@ export class DataOperation {
   private definition: DataOperationDef;
   private parsedURI: string = '';
 
-  // region Constructors and parsers 
+  // region Constructors and parsers
 
   private constructor(definition: DataOperationDef, parameters: any[]) {
     this.definition = definition;
