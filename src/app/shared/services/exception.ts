@@ -40,17 +40,15 @@ export class Exception extends Error {
 
   constructor(data: ExceptionData) {
     super(data.message);
-    super.name = data.name || 'EmpiriaException';
 
+    this.name = data.name || 'EmpiriaException';
     this._code = data.code || 'Unknown';
     this._hint = data.hint || '';
     this._source = data.source || '';
     this._issues = data.issues || [];
     this._innerException = data.innerException || {};
 
-    super.message = data.message;   // Assign because there are ES6 issues yet
-    // look at: https://github.com/Microsoft/TypeScript/issues/5069
-    //          https://github.com/Microsoft/TypeScript/issues/1168
+
   }
 
   public get code(): string {

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { DataOperation } from '../shared/services/data.operation';
 import { DataService } from '../shared/services/data.service';
 import { PropertyItem } from '../shared/services/propertyItem';
-import 'rxjs/Rx';
 
 export enum DocumentItemType {
   empty = 0,

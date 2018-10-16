@@ -39,8 +39,8 @@ export class Validate {
     return value === true;
   }
 
-  public static notNull(value: string): boolean {
-    if ((value === null) || (value === undefined) || value === {}) {
+  public static notNull(value: any): boolean {
+    if ((value === null) || (value === undefined) || value === NaN || value === {}) {
       return false;
     }
     return true;

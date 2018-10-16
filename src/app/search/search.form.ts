@@ -3,11 +3,8 @@ import { Router } from '@angular/router';
 
 import { SearchService, DocumentItemType } from './search.service';
 import { PropertyItem } from '../shared/services/propertyItem';
-import 'rxjs/Rx';
-
 
 @Component({
-  moduleId: module.id,
   selector: 'search-form',
   templateUrl: 'search.form.html',
 

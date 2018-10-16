@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { SearchService, DocumentItemType } from './search.service';
 import { PropertyItem } from '../shared/services/propertyItem';
-import 'rxjs/Rx';
 
 interface SearchData {
    type: DocumentItemType;
@@ -11,7 +10,6 @@ interface SearchData {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'search-kiosk-form',
   templateUrl: 'search-kiosk.form.html',
 

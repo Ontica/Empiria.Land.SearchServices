@@ -3,8 +3,6 @@ import { Http } from '@angular/http';
 
 import { DataOperation } from './data.operation';
 
-import 'rxjs/add/operator/toPromise';
-
 @Injectable()
 export class HttpDataService {
 

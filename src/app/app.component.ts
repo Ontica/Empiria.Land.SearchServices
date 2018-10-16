@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { APP_SETTINGS } from './empiria.config';
-import './operators';
 
 /**
  * This class represents the main application component.
  */
 @Component({
-  moduleId: module.id,
-  selector: 'empiria-land',
+  selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {

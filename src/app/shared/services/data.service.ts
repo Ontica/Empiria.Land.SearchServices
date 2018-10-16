@@ -4,8 +4,6 @@ import { HttpDataService } from './http.data.service';
 
 import { DataOperation } from './data.operation';
 
-import 'rxjs/Rx';
-
 @Injectable()
 export class DataService {
 
