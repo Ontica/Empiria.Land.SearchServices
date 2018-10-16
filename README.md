@@ -1,74 +1,53 @@
-﻿# Introduction
+﻿# Empiria Land Search Services
 
-Empiria Land Search Services is an e-government portal used to search real estate,
-documents, certificates and other information, concerning with a Recorder of Lands office.
+### Overview
 
-This project is based on Angular and TypeScript.
+Empiria Land Search Services is an e-government portal used to search and validate data in real time about recording documents, real estate, issued certificates, requested filings, and other recordable information, concerning with a Recorder of Lands Office.
 
-# How to start
+### Quick start
 
-**Note** this project requires node v4.x.x or higher and npm 2.14.7.
+This project is being built with Angular 6 and TypeScript.
 
-You must have `ts-node` installed as global. If you don't, use:
+It uses [Angular CLI](https://github.com/angular/angular-cli), so both the CLI and generated project, have dependencies that require Node 8.9 or higher, together with NPM 5.5.1 or higher.
+
+**Make sure you haveNode version >= 8.9 and NPM >= 5.5.1**
+
+**Then install [Angular CLI](https://github.com/angular/angular-cli)** (globally if possible), ensuring that you have installed **version 6.2.5** or higher.
 
 ```bash
-npm install -g ts-node
+# install Angular CLI globally
+npm install -g @angular/cli
+
+# check Angular CLI, Angular and TypeScript versions
+ng -v
 ```
 
-In order to start use:
-```bash
+After that, please download and install this repo:
 
+```bash
+# clone (or fork) this repo
 git clone https://github.com/Ontica/Empiria.Land.SearchServices
+
+# change directory
 cd Empiria.Land.SearchServices
 
-# install the project's dependencies
-$ npm install
+# install the repo with npm
+npm install
 
-# watches your files and uses livereload by default
-npm start
-
-# dev build
-npm run build.dev
-# prod build
-npm run build.prod
+# Use Angular CLI to start the server
+ng serve --open
 ```
 
-# How to start with AoT compilation
+By default, you have to navigate to [http://localhost:4200](http://localhost:4200) to see the application running.
 
-**Note** that AoT compilation requires **node v6.5.0 or higher** and **npm 3.10.3 or higher**.
+# Backend access
 
-In order to start the seed with AoT use:
-
-```bash
-# prod build with AoT compilation
-$ npm run build.prod.exp
-```
-
-# Configuration
-
-Default application server configuration
-
-```javascript
-var PORT             = 5555;
-var LIVE_RELOAD_PORT = 4002;
-var DOCS_PORT        = 4003;
-var APP_BASE         = '/';
-```
-
-Configure at runtime
-
-```bash
-npm run start -- --port 8080 --reload-port 4000 --base /my-app/
-
-# Running tests
-
-```bash
-npm tests
-```
+In order to run this application, you MUST have a valid API KEY and access credentials to connect to the system's backend. Please request them by sending us an email.
 
 # License
 
-GNU AFFERO GENERAL PUBLIC LICENSE
+This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Empiria.Land.SearchServices/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
 
-#
-Copyright (C) 2016-2018. La Vía Óntica SC, Ontica LLC and contributors.
+# Copyright
+
+Copyright © 2017-2018. La Vía Óntica SC, Ontica LLC and contributors.
