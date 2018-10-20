@@ -6,7 +6,7 @@ Empiria Land Search Services is an e-government portal used to search and valida
 
 ### Quick start
 
-This project is being built with Angular 6 and TypeScript.
+This project is being built with Angular 7 and TypeScript 3.
 
 It uses [Angular CLI](https://github.com/angular/angular-cli), so both the CLI and generated project, have dependencies that require Node 8.9 or higher, together with NPM 5.5.1 or higher.
 
