@@ -26,6 +26,7 @@ export class SearchForm implements OnInit {
   public document: PropertyItem[];
   public itemUID = '';
   public itemHash = '';
+  public msg = '';
   public hasError = false;
   public errorMessage = '';
   private subscription: any;
@@ -38,10 +39,11 @@ export class SearchForm implements OnInit {
 
   ngOnInit() {
     this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
-      let docType = params['type'] || 'empty';
+      const docType = params['type'] || 'empty';
       this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
       this.itemUID = params['uid'] || '';
       this.itemHash = params['hash'] || undefined;
+      this.msg = params['msg'] || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
       this.searchDocument();
     });
@@ -86,7 +88,7 @@ export class SearchForm implements OnInit {
       return;
     }
 
-    this.searchService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash)
+    this.searchService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash, this.msg)
       .then(x => this.setDocument(x))
       .catch(x => this.showErrorMessage(x));
 

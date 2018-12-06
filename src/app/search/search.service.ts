@@ -28,10 +28,10 @@ export class SearchService {
 
   // region Public methods
 
-  public getDocument(documentType: DocumentItemType, uid: string, hashcode: string):
-  Promise<PropertyItem[]> {
-    let dataOperationUID = this.getOperationName(documentType);
-    let dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode);
+  public getDocument(documentType: DocumentItemType, uid: string,
+                     hashcode: string, msg: string): Promise<PropertyItem[]> {
+    const dataOperationUID = this.getOperationName(documentType);
+    const dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode, msg);
 
     return this.dataService.getList<PropertyItem[]>(dataOperation);
   }

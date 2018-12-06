@@ -153,7 +153,7 @@ export class SearchKioskForm {
     this.document = [];
 
     this.searchService.getDocument(data.type,
-                                   data.uid, data.hash)
+                                   data.uid, data.hash, '')
                       .then(x => this.document = x)
                       .catch(x => this.showErrorMessage(x));
   }
