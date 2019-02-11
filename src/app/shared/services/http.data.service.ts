@@ -17,24 +17,29 @@ export class HttpDataService {
 
   }
 
-  // region Public methods
-
-  public getList<T>(dataOperation: DataOperation): Promise<T> {
-    let url = dataOperation.getURI();
+  getList<T>(dataOperation: DataOperation): Promise<T> {
+    const url = dataOperation.getURI();
 
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as T)
       .catch(this.handleError);
   }
-  // endregion Public methods
 
-  // region Private methods
+
+  post<T>(dataOperation: DataOperation, body?: any): Promise<T> {
+    const url = dataOperation.getURI();
+
+    return this.http.post(url, body)
+      .toPromise()
+      .then(response => response.json().data as T)
+      .catch(this.handleError);
+  }
+
+  // private methods
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.json().data || error.message);
   }
-
-  // endregion Private methods
 
 }

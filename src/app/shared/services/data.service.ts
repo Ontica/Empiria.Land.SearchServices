@@ -14,20 +14,16 @@ import { DataOperation } from './data.operation';
 @Injectable()
 export class DataService {
 
-  constructor(private httpDataService: HttpDataService) {
+  constructor(private httpDataService: HttpDataService) { }
 
-  }
 
-  // region Public methods
-
-  public getList<T>(dataOperation: DataOperation): Promise<T> {
+  getList<T>(dataOperation: DataOperation): Promise<T> {
     return this.httpDataService.getList<T>(dataOperation);
   }
 
-  // endregion Public methods
 
-  // region Private methods
-
-  // endregion Private methods
+  execute<T>(dataOperation: DataOperation, body?: any): Promise<T> {
+    return this.httpDataService.post<T>(dataOperation, body);
+  }
 
 }

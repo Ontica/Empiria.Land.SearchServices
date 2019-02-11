@@ -14,7 +14,6 @@ import { PropertyItem } from '../shared/services/propertyItem';
 @Component({
   selector: 'search-form',
   templateUrl: 'search.form.html',
-
   providers: [SearchService]
 })
 
@@ -90,7 +89,7 @@ export class SearchForm implements OnInit {
 
     this.searchService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash, this.msg)
       .then(x => this.setDocument(x))
-      .catch(x => this.showErrorMessage(x));
+      .catch(err => this.showErrorMessage(err));
 
   }
 
@@ -105,9 +104,27 @@ export class SearchForm implements OnInit {
   }
 
 
+  onElectronicDelivery() {
+    this.searchService.electronicDelivery(this.itemUID, this.itemHash, this.msg)
+      .then(x => this.setDocument(x))
+      .catch(err => this.showErrorMessage(err));
+  }
+
+  // private methods
+
   private showErrorMessage(error: any): void {
     this.hasError = true;
-    this.errorMessage = (<string>error.errorMessage).replace(/\n/g, '<br />');
+
+    if (!error) {
+      this.errorMessage = 'Tuve un problema al ejecutar la operación.';
+    } else if (error.errorMessage) {
+      this.errorMessage = (<string>error.errorMessage).replace(/\n/g, '<br />');
+    } else if (error.message) {
+      this.errorMessage = (<string>error.message).replace(/\n/g, '<br />');
+    } else if (error.data) {
+      this.errorMessage = error.data;
+    }
+
   }
 
 
@@ -172,6 +189,7 @@ export class SearchForm implements OnInit {
 
   private showValidatePatternsError(): void {
     this.hasError = true;
+
     this.errorMessage = 'El ' + this.selectedDocumentItemName.toLowerCase() +
       ' no tiene un formato correcto. Favor de revisarlo e intentarlo nuevamente.';
   }

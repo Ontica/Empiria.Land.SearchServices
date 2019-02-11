@@ -22,23 +22,25 @@ export enum DocumentItemType {
 @Injectable()
 export class SearchService {
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService) { }
 
+
+  electronicDelivery(uid: string, hashcode: string, msg: string): Promise<PropertyItem[]> {
+    const dataOperation = DataOperation.parse('electronicDelivery', uid, hashcode, msg);
+
+    return this.dataService.execute<PropertyItem[]>(dataOperation);
   }
 
-  // region Public methods
 
-  public getDocument(documentType: DocumentItemType, uid: string,
-                     hashcode: string, msg: string): Promise<PropertyItem[]> {
+  getDocument(documentType: DocumentItemType, uid: string,
+              hashcode: string, msg: string): Promise<PropertyItem[]> {
     const dataOperationUID = this.getOperationName(documentType);
     const dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode, msg);
 
     return this.dataService.getList<PropertyItem[]>(dataOperation);
   }
 
-  // endregion Public methods
-
-  // region Private methods
+  // private methods
 
   private getOperationName(documentType: DocumentItemType): string {
     switch (documentType) {
@@ -56,10 +58,8 @@ export class SearchService {
         return 'getDocument';
 
       default:
-        throw 'Invalid document type';
+        throw new Error('Invalid document type');
     }
-
-    // endregion Private methods
 
   }
 
