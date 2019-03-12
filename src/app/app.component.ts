@@ -35,9 +35,9 @@ export class AppComponent {
 
   public get advertisementImage() {
     if (APP_SETTINGS.displayVedaElectoralUI) {
-      return './assets/images/customer/honestidad.veda.jpg';
+      return './assets/images/customer/advertisement.veda.jpg';
     }
-    return './assets/images/customer/honestidad.jpg';
+    return './assets/images/customer/advertisement.jpg';
   }
 
 }
