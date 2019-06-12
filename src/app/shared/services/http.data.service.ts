@@ -6,14 +6,14 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { DataOperation } from './data.operation';
 
 @Injectable()
 export class HttpDataService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -22,7 +22,7 @@ export class HttpDataService {
 
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as T)
+      .then(response => response['data'] as T)
       .catch(this.handleError);
   }
 
@@ -31,15 +31,16 @@ export class HttpDataService {
     const url = dataOperation.getURI();
 
     return this.http.post(url, body)
-      .toPromise()
-      .then(response => response.json().data as T)
-      .catch(this.handleError);
+          .toPromise()
+          .then(response => response['data'] as T)
+          .catch(this.handleError);
   }
 
   // private methods
 
   private handleError(error: any): Promise<any> {
-    return Promise.reject(error.json().data || error.message);
+    console.log(error);
+    return Promise.reject(error.error.data || error);
   }
 
 }
