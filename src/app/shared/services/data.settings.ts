@@ -6,9 +6,9 @@
  */
 
  import { DataOperationDef } from './data.operation';
-import { APP_SETTINGS } from './../../empiria.config';
+ import { APP_SETTINGS } from '../../../assets/empiria.config';
 
-export class DataSettingsDef {
+ export class DataSettingsDef {
 
   defaultServer: string;
   apiKey: string;
@@ -16,39 +16,39 @@ export class DataSettingsDef {
 
 }
 
-export class DataSettings {
+ export class DataSettings {
 
   private static instance: DataSettings = new DataSettings();
-  public settings: DataSettingsDef;
 
-  // region Public methods
+  settings: DataSettingsDef;
 
-  public static getOperations(): DataOperationDef[] {
+  //  Public methods
+
+  static getOperations(): DataOperationDef[] {
     return DataSettings.instance.settings.initialOperations;
   }
 
-  public static getDefaultServer(): string {
+
+  static getDefaultServer(): string {
     return DataSettings.instance.settings.defaultServer;
   }
 
-  // endregion Public methods
 
-  // region Private methods
+  // Private methods
 
   private constructor() {
     this.settings = new DataSettingsDef();
     this.loadInitialValues();
   }
 
+
   private loadInitialValues(): void {
-    let dataSettings = new DataSettingsDef();
+    const dataSettings = new DataSettingsDef();
 
     dataSettings.defaultServer = APP_SETTINGS.defaultDataServer;
     dataSettings.apiKey = APP_SETTINGS.apiKey;
     dataSettings.initialOperations = APP_SETTINGS.initialOperations;
     this.settings = dataSettings;
   }
-
-  // endregion Private methods
 
 }

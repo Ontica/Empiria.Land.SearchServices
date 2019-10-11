@@ -1,92 +1,99 @@
 /**
- *  Solution : Empiria Core Client                             || v0.3.0625
- *  Type     : Empiria.Exception
- *  Summary  : Static library that allows assertion checking.
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
- *  Copyright (c) 2015-2016. Ontica LLC, La Vía Óntica SC and contributors. <http://ontica.org>
-*/
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
-export interface ExceptionData {
-  message: string;
-  code?: string;
-  name?: string;
-  hint?: string;
-  source?: string;
-  issues?: string[];
-  innerException?: any;
-}
+import { HttpErrorResponse } from '@angular/common/http';
+
+/* tslint:disable:max-classes-per-file */
 
 export class Exception extends Error {
 
-  private _code: string = '';
-  private _hint: string = '';
-  private _source: string = '';
-  private _trace: string = '';
-  private _issues: string[] = [];
-  private _innerException: any = {};
+  readonly code: string;
+  readonly innerError: Error;
 
-  public static throw(data: string | ExceptionData): void {
-    let exception: Exception;
+  constructor(message: string, innerError?: Error) {
+    super(Exception.extractErrorMessage(message));
 
-    if (typeof data === 'string') {
-      exception = new Exception({ message: <string>data });
+    // This line is because a Typescript to ECMA5 issue: https://goo.gl/jtiFyy
+    Object.setPrototypeOf(this, Exception.prototype);
+
+    this.innerError = innerError;
+    this.code = Exception.extractErrorCode(message);
+  }
+
+  static convertTo(sourceErr: any, defaultMessage?: string): Exception {
+    if (!sourceErr) {
+      return new Exception(defaultMessage || `Error con valor 'undefined' o 'null'.`); // 'UNDEFINED_ERROR'
+
+    } else if (sourceErr instanceof HttpErrorResponse) {
+      return new Exception('Http server error: ' + (defaultMessage || sourceErr.error.message), sourceErr.error);
+
+    } else if (sourceErr instanceof Exception) {
+      return new Exception(defaultMessage || sourceErr.message, sourceErr);
+
+    } else if (sourceErr instanceof Error) {
+      return new Exception(defaultMessage || sourceErr.message, sourceErr);
+
     } else {
-      exception = new Exception(<ExceptionData>data);
+      return new Exception(defaultMessage || sourceErr.message, sourceErr);
     }
-    console.log('There was a problem: ' + exception.message + '\n' + exception.toString());
-
-    throw exception;
   }
 
-  constructor(data: ExceptionData) {
-    super(data.message);
+  private static extractErrorCode(fullMessage: string): string {
+    const errorCode = fullMessage.match(/\[(.*?)\]/g);
 
-    this.name = data.name || 'EmpiriaException';
-    this._code = data.code || 'Unknown';
-    this._hint = data.hint || '';
-    this._source = data.source || '';
-    this._issues = data.issues || [];
-    this._innerException = data.innerException || {};
-
-
-  }
-
-  public get code(): string {
-    return this._code;
-  }
-
-  public get hint(): string {
-    return this._hint;
-  }
-
-  public get source(): string {
-    return this._source;
-  }
-
-  public get issues(): string[] {
-    return this._issues;
-  }
-
-  public get trace(): string {
-    return this._trace;
-  }
-
-  public get innerException(): any {
-    return this._innerException;
-  }
-
-  // Override of the toString method, in order to return a specific message.
-  public toString(): string {
-    let template = '  Code: {0}  Name: {1}  Source: {2}  Message: {3}  Hint: {4}' +
-      '  Issues: {5}  InnerException: {6}  Trace: {7}';
-
-    let parameters = [this.code, this.name, this.source, this.message, this.hint,
-    this.issues.toString(), JSON.stringify(this._innerException), this.trace];
-
-    for (let i = 0; i < parameters.length; i++) {
-      template = template.replace('{' + i.toString() + '}', parameters[i].trim() + '\n');
+    if (errorCode) {
+      return errorCode.toString().replace('[', '').replace(']', '');
+    } else {
+      return 'UNDEFINED_ERR';
     }
-    return template;
   }
 
-}  // class Exception
+  private static extractErrorMessage(fullMessage: string): string {
+    const errorCode = this.extractErrorCode(fullMessage);
+
+    return fullMessage.replace(`[${errorCode}]`, '')
+      .trim();
+  }
+
+  show(): void {
+    let errMsg = 'Tengo un problema.\n\n';
+
+    errMsg += this.message + '\n\n';
+    errMsg += `Código: ${this.code}\n\n`;
+    if (this.innerError) {
+      if (this.innerError instanceof Exception) {
+        errMsg += `Error interno: [${this.innerError.code}] ${this.innerError.message}`;
+      } else {
+        errMsg += `Error interno: ${this.innerError.message}`;
+      }
+    }
+    alert(errMsg);
+  }
+
+}
+
+export interface HttpExceptionData {
+  request: any;
+  response: any;
+}
+
+export class HttpException extends Exception {
+
+  readonly request: any;
+  readonly response: any;
+
+  constructor(message: string, innerException?: Error, initData?: HttpExceptionData) {
+    super(message, innerException);
+
+    // This line is because a TypeScript to ECMA5 issue: https://goo.gl/jtiFyy
+    Object.setPrototypeOf(this, HttpException.prototype);
+
+    this.request = initData.request;
+    this.response = initData.response;
+  }
+
+}

@@ -23,7 +23,7 @@ export class DataOperation {
   private static DEFINED_OPERATIONS: DataOperationDef[];
 
   private definition: DataOperationDef;
-  private parsedURI: string = '';
+  private parsedURI = '';
 
   // region Constructors and parsers
 
@@ -32,10 +32,10 @@ export class DataOperation {
     this.parsedURI = DataOperation.getParsedURI(this.definition, parameters);
   }
 
-  public static parse(dataOperationUID: string, ...parameters: any[]): DataOperation {
+  static parse(dataOperationUID: string, ...parameters: any[]): DataOperation {
     Assertion.assertValue(dataOperationUID, 'dataOperationUID');
 
-    let definition = DataOperation.parseDataOperationDef(dataOperationUID);
+    const definition = DataOperation.parseDataOperationDef(dataOperationUID);
 
     return new DataOperation(definition, parameters);
   }
@@ -43,10 +43,10 @@ export class DataOperation {
   private static parseDataOperationDef(dataOperationUID: string): DataOperationDef {
     DataOperation.assertDEFINED_OPERATIONSLoaded();
 
-    let foundedItems = DataOperation.DEFINED_OPERATIONS.filter((x) => x.uid === dataOperationUID);
+    const foundedItems = DataOperation.DEFINED_OPERATIONS.filter((x) => x.uid === dataOperationUID);
 
     if (foundedItems.length === 0) {
-      throw 'DataOperation ' + dataOperationUID + ' is undefined.';
+      throw new Error('DataOperation ' + dataOperationUID + ' is undefined.');
     }
 
     return foundedItems[0];
@@ -58,20 +58,9 @@ export class DataOperation {
     }
   }
 
-  // endregion Constructors and parsers
 
-  // region Public methods
+  // Auxiliary methods
 
-
-  public getURI(): string {
-    let servicesServer = DataSettings.getDefaultServer();
-
-    return servicesServer + this.parsedURI;
-  }
-
-  // endregion Public methods
-
-  // region Auxiliary methods
 
   private static getParsedURI(definition: DataOperationDef, parameters: any[]): string {
     parameters = parameters || [];
@@ -88,21 +77,25 @@ export class DataOperation {
   }
 
   private static formatParameters(url: string): string {
-    //replace []
+    // replace []
     url = url.replace(new RegExp('(\\[)|(\\])', 'g'), '');
-    //replace parameter=null or paramater={number} or parameter=undefined
+    // replace parameter=null or paramater={number} or parameter=undefined
     url = url.
       replace(new RegExp('([A-Za-z0-9\-]+=((undefined)|(null)|({[0-9]})))', 'g'), '');
-    //replace && &&& &...&&&
+    // replace && &&& &...&&&
     url = url.replace(new RegExp('(&)\\1+', 'g'), '&');
-    //replace &?
+    // replace &?
     url = url.replace(new RegExp('\\?&'), '?');
-    //replace ? at end or & at end
+    // replace ? at end or & at end
     url = url.replace(new RegExp('(\\?$)|(&$)'), '');
 
     return url;
   }
 
-  // endregion Auxiliary methods
+  getURI(): string {
+    const servicesServer = DataSettings.getDefaultServer();
+
+    return servicesServer + this.parsedURI;
+  }
 
 }

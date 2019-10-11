@@ -1,10 +1,9 @@
 /**
- *  Solution : Empiria Core Client                             || v0.3.0625
- *  Type     : Empiria.TriState
- *  Summary  : Enumeration that represents a boolean value as true, false or with empty value.
+ * @license
+ * Copyright (c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved.
  *
- *  Copyright (c) 2015-2016. Ontica LLC, La Vía Óntica SC and contributors. <http://ontica.org>
-*/
+ * See LICENSE.txt in the project root for complete license information.
+ */
 
 export enum TriState {
   true = 1,
