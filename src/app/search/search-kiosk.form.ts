@@ -17,29 +17,26 @@ interface SearchData {
 }
 
 @Component({
-  selector: 'search-kiosk-form',
+  selector: 'emp-land-search-kiosk',
   templateUrl: 'search-kiosk.form.html',
-
   providers: [SearchService]
 })
-export class SearchKioskForm {
+export class SearchKioskComponent {
 
-  public document: PropertyItem[] = [];
-  public searchText: string = '';
-  public errorMessage = '';
+  document: PropertyItem[] = [];
+  searchText = '';
+  errorMessage = '';
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService) { }
 
-  }
-
-  public onsearch(): void {
+  onsearch(): void {
     if (this.searchText.length === 0) {
       return;
     }
 
     this.initialize();
 
-    let data = this.tryGetSearchData(this.searchText);
+    const data = this.tryGetSearchData(this.searchText);
 
     if (data !== null) {
       this.searchDocument(data);
@@ -49,13 +46,18 @@ export class SearchKioskForm {
     this.searchText = '';
   }
 
+
+  // private methods
+
+
   private initialize(): void {
     this.document = [];
     this.errorMessage = '';
   }
 
+
   private tryGetSearchData(value: string): SearchData {
-    let searchData = this.tryGetUID(value);
+    const searchData = this.tryGetUID(value);
 
     if (searchData === null) {
       return null;
@@ -65,6 +67,7 @@ export class SearchKioskForm {
 
     return searchData;
   }
+
 
   private tryGetUID(value: string): SearchData {
     value = value.toUpperCase();
@@ -138,8 +141,9 @@ export class SearchKioskForm {
     return null;
   }
 
+
   private tryGetHash(value: string): string {
-    let matched = value.match(/(hash=[\w\d-]*)\w*/g);
+    const matched = value.match(/(hash=[\w\d-]*)\w*/g);
 
     let hash: string = null;
 
@@ -148,6 +152,7 @@ export class SearchKioskForm {
     }
     return hash;
   }
+
 
   private searchDocument(data: SearchData): void {
     this.document = [];
@@ -158,9 +163,10 @@ export class SearchKioskForm {
                       .catch(x => this.showErrorMessage(x));
   }
 
+
   private showErrorMessage(error: any): void {
-    this.errorMessage = (<string>error.errorMessage).replace(/\n/g, '<br />');
+    this.errorMessage = (error.errorMessage as string).replace(/\n/g, '<br />');
   }
 
 
-}  // class SearchKioskForm
+}

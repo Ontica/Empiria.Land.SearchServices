@@ -11,38 +11,37 @@ import { Router } from '@angular/router';
 import { SearchService, DocumentItemType } from './search.service';
 import { PropertyItem } from '../shared/services/propertyItem';
 
+
 @Component({
-  selector: 'search-form',
+  selector: 'emp-land-search-form',
   templateUrl: 'search.form.html',
   providers: [SearchService]
 })
+export class SearchFormComponent implements OnInit {
 
-export class SearchForm implements OnInit {
-
-  public DocumentItemType = DocumentItemType;
-  public selectedDocumentItemType = 0;
-  public selectedDocumentItemName = 'Consultar';
-  public document: PropertyItem[];
-  public itemUID = '';
-  public itemHash = '';
-  public msg = '';
-  public hasError = false;
-  public errorMessage = '';
+  DocumentItemType = DocumentItemType;
+  selectedDocumentItemType = 0;
+  selectedDocumentItemName = 'Consultar';
+  document: PropertyItem[];
+  itemUID = '';
+  itemHash = '';
+  msg = '';
+  hasError = false;
+  errorMessage = '';
   private subscription: any;
 
 
-  constructor(private router: Router, private searchService: SearchService) {
-
-  }
+  constructor(private router: Router,
+              private searchService: SearchService) { }
 
 
   ngOnInit() {
     this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
-      const docType = params['type'] || 'empty';
-      this.selectedDocumentItemType = (<any>DocumentItemType)[docType];
-      this.itemUID = params['uid'] || '';
-      this.itemHash = params['hash'] || undefined;
-      this.msg = params['msg'] || '';
+      const docType = params.type || 'empty';
+      this.selectedDocumentItemType = (DocumentItemType as any)[docType];
+      this.itemUID = params.uid || '';
+      this.itemHash = params.hash || undefined;
+      this.msg = params.msg || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
       this.searchDocument();
     });
@@ -50,13 +49,13 @@ export class SearchForm implements OnInit {
   }
 
 
-  public setDocumentItem(selectedValue: string): void {
+  setDocumentItem(selectedValue: string) {
     this.selectedDocumentItemType = Number(selectedValue);
     this.selectedDocumentItemName = this.getSelectedItemName();
   }
 
 
-  public getSelectedItemName(): string {
+  getSelectedItemName(): string {
     switch (this.selectedDocumentItemType) {
       case DocumentItemType.empty:
         return 'Consultar';
@@ -79,7 +78,7 @@ export class SearchForm implements OnInit {
   }
 
 
-  public searchDocument(): void {
+  searchDocument(): void {
     this.hasError = false;
     this.document = [];
 
@@ -94,7 +93,7 @@ export class SearchForm implements OnInit {
   }
 
 
-  public clearForm(): void {
+  clearForm(): void {
     this.selectedDocumentItemType = 0;
     this.itemUID = '';
     this.document = [];
@@ -110,7 +109,9 @@ export class SearchForm implements OnInit {
       .catch(err => this.showErrorMessage(err));
   }
 
+
   // private methods
+
 
   private showErrorMessage(error: any): void {
     this.hasError = true;
@@ -118,9 +119,9 @@ export class SearchForm implements OnInit {
     if (!error) {
       this.errorMessage = 'Tuve un problema al ejecutar la operación.';
     } else if (error.errorMessage) {
-      this.errorMessage = (<string>error.errorMessage).replace(/\n/g, '<br />');
+      this.errorMessage = (error.errorMessage as string).replace(/\n/g, '<br />');
     } else if (error.message) {
-      this.errorMessage = (<string>error.message).replace(/\n/g, '<br />');
+      this.errorMessage = (error.message as string).replace(/\n/g, '<br />');
     } else if (error.data) {
       this.errorMessage = error.data;
     }
@@ -195,4 +196,4 @@ export class SearchForm implements OnInit {
   }
 
 
-}  // class SearchForm
+}
