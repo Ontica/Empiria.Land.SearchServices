@@ -24,7 +24,7 @@ import { DataService } from './services/data.service';
 })
 export class SharedModule {
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
       providers: [HttpDataService, DataService]
