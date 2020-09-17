@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "land-search-services"
+  "defaultProject": "land-search-services",
+  "cli": {
+    "analytics": "a7558897-959b-4f01-b504-c1c7c4a32329"
+  }
 }
