@@ -11,12 +11,14 @@ import { SearchFormComponent, SearchKioskComponent } from './index';
 import { SearchServicesRoutingModule } from './search.routes';
 
 import { SharedModule } from './../shared/shared.module';
-import { DataService } from './../shared/services/data.service';
+
+import { SearchApiHttpProvider } from './providers/search-api.http.provider';
+import { CoreModule } from '@app/core/core.module';
 
 @NgModule({
-  imports: [CommonModule, SearchServicesRoutingModule, SharedModule],
+  imports: [CommonModule, SearchServicesRoutingModule, SharedModule, CoreModule],
   declarations: [SearchFormComponent, SearchKioskComponent],
   exports: [SearchFormComponent, SearchKioskComponent],
-  providers: [DataService]
+  providers: [SearchApiHttpProvider]
 })
 export class LandSearchServicesModule { }

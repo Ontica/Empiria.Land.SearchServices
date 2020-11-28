@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SearchService, DocumentItemType } from './search.service';
-import { PropertyItem } from '../shared/services/propertyItem';
+import { SearchResultDataItem } from './models/search-result-data-item';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class SearchFormComponent implements OnInit {
   DocumentItemType = DocumentItemType;
   selectedDocumentItemType = 0;
   selectedDocumentItemName = 'Consultar';
-  document: PropertyItem[];
+  document: SearchResultDataItem[];
   itemUID = '';
   itemHash = '';
   msg = '';
@@ -129,7 +129,7 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  private setDocument(document: PropertyItem[]): void {
+  private setDocument(document: SearchResultDataItem[]): void {
     this.document = document;
   }
 

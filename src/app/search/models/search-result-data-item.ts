@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-export class PropertyItem {
+export class SearchResultDataItem {
   name: string;
   value: any;
   style: string;

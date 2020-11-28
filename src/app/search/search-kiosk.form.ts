@@ -8,7 +8,7 @@
 import { Component } from '@angular/core';
 
 import { SearchService, DocumentItemType } from './search.service';
-import { PropertyItem } from '../shared/services/propertyItem';
+import { SearchResultDataItem } from './models/search-result-data-item';
 
 interface SearchData {
    type: DocumentItemType;
@@ -23,7 +23,7 @@ interface SearchData {
 })
 export class SearchKioskComponent {
 
-  document: PropertyItem[] = [];
+  document: SearchResultDataItem[] = [];
   searchText = '';
   errorMessage = '';
 

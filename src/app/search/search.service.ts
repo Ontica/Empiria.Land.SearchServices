@@ -7,9 +7,10 @@
 
 import { Injectable } from '@angular/core';
 
-import { DataOperation } from '../shared/services/data.operation';
-import { DataService } from '../shared/services/data.service';
-import { PropertyItem } from '../shared/services/propertyItem';
+import { SearchResultDataItem } from './models/search-result-data-item';
+
+import { SearchApiHttpProvider } from './providers/search-api.http.provider';
+
 
 export enum DocumentItemType {
   empty = 0,
@@ -22,23 +23,23 @@ export enum DocumentItemType {
 @Injectable()
 export class SearchService {
 
-  constructor(private dataService: DataService) { }
+  constructor(private provider: SearchApiHttpProvider) { }
 
 
-  electronicDelivery(uid: string, hashcode: string, msg: string): Promise<PropertyItem[]> {
-    const dataOperation = DataOperation.parse('electronicDelivery', uid, hashcode, msg);
+  electronicDelivery(uid: string, hashcode: string, msg: string): Promise<SearchResultDataItem[]> {    
 
-    return this.dataService.execute<PropertyItem[]>(dataOperation);
+    return this.provider.getElectronicDeliver(uid, hashcode, msg).toPromise();
   }
 
 
   getDocument(documentType: DocumentItemType, uid: string,
-              hashcode: string, msg: string): Promise<PropertyItem[]> {
-    const dataOperationUID = this.getOperationName(documentType);
-    const dataOperation = DataOperation.parse(dataOperationUID, uid, hashcode, msg);
+              hashcode: string, msg: string): Promise<SearchResultDataItem[]> {
 
-    return this.dataService.getList<PropertyItem[]>(dataOperation);
+    const dataOperationUID = this.getOperationName(documentType);     
+      
+    return this.getList(dataOperationUID,uid);   
   }
+  
 
   // private methods
 
@@ -56,6 +57,27 @@ export class SearchService {
 
       case DocumentItemType.document:
         return 'getDocument';
+
+      default:
+        throw new Error('Invalid document type');
+    }
+
+  }
+
+  private getList(dataOperationUID: string, uid: string ): Promise<SearchResultDataItem[]> {
+    switch (dataOperationUID) {
+
+      case 'getResource':
+        return this.provider.getResource(uid).toPromise();
+
+      case 'getTransaction':
+        return this.provider.getTransaction(uid).toPromise();
+
+      case 'getCertificate':
+        return this.provider.getCertificate(uid).toPromise();
+
+      case 'getDocument':
+        return this.provider.getDocument(uid).toPromise();
 
       default:
         throw new Error('Invalid document type');
