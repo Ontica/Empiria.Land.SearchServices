@@ -8,9 +8,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchService, DocumentItemType } from './search.service';
-import { SearchResultDataItem } from './models/search-result-data-item';
+import { DocumentItemType, SearchResultDataItem } from './models/models';
+import { SearchService } from './search.service';
 
+interface SearchData {
+  type: DocumentItemType;
+  uid: string;  
+}
 
 @Component({
   selector: 'emp-land-search-form',
@@ -19,11 +23,10 @@ import { SearchResultDataItem } from './models/search-result-data-item';
 })
 export class SearchFormComponent implements OnInit {
 
-  DocumentItemType = DocumentItemType;
-  selectedDocumentItemType = 0;
+  searchDocument: SearchData = { type: 0, uid: ''}
+  DocumentItemType = DocumentItemType;  
   selectedDocumentItemName = 'Consultar';
-  document: SearchResultDataItem[];
-  itemUID = '';
+  document: SearchResultDataItem[];  
   itemHash = '';
   msg = '';
   hasError = false;
@@ -37,26 +40,28 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
-      const docType = params.type || 'empty';
-      this.selectedDocumentItemType = (DocumentItemType as any)[docType];
-      this.itemUID = params.uid || '';
+      const docType = params.type || 'empty';     
+      this.searchDocument.type = (DocumentItemType as any)[docType];
+      this.searchDocument.uid = params.uid || '';
       this.itemHash = params.hash || undefined;
       this.msg = params.msg || '';
       this.selectedDocumentItemName = this.getSelectedItemName();
-      this.searchDocument();
+      this.onSearchDocument();
     });
+  
 
   }
 
 
-  setDocumentItem(selectedValue: string) {
-    this.selectedDocumentItemType = Number(selectedValue);
+  onSelectDocumentItem(selectedValue: string) {   
+    this.searchDocument.type =  Number(selectedValue);
     this.selectedDocumentItemName = this.getSelectedItemName();
   }
 
 
-  getSelectedItemName(): string {
-    switch (this.selectedDocumentItemType) {
+  getSelectedItemName(): string {   
+    switch(this.searchDocument.type) {
+    
       case DocumentItemType.empty:
         return 'Consultar';
 
@@ -78,24 +83,26 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  searchDocument(): void {
+  onSearchDocument(): void {
     this.hasError = false;
     this.document = [];
 
     if (!this.validate()) {
       return;
-    }
-
-    this.searchService.getDocument(this.selectedDocumentItemType, this.itemUID, this.itemHash, this.msg)
-      .then(x => this.setDocument(x))
-      .catch(err => this.showErrorMessage(err));
+    }    
+    
+    this.searchService.getDocument(this.searchDocument.type, this.searchDocument.uid)
+      .subscribe(
+        x => this.document = x,
+        err => this.showErrorMessage(err)
+    );
 
   }
 
 
-  clearForm(): void {
-    this.selectedDocumentItemType = 0;
-    this.itemUID = '';
+  clearForm(): void {    
+    this.searchDocument.type = 0;
+    this.searchDocument.uid  = '';
     this.document = [];
     this.hasError = false;
     this.selectedDocumentItemName = this.getSelectedItemName();
@@ -103,10 +110,14 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  onElectronicDelivery() {
-    this.searchService.electronicDelivery(this.itemUID, this.itemHash, this.msg)
-      .then(x => this.setDocument(x))
-      .catch(err => this.showErrorMessage(err));
+  onElectronicDelivery() {    
+    
+    this.searchService.getElectronicDelivery(this.searchDocument.uid, this.itemHash, this.msg)
+      .subscribe(
+        x => this.document = x,
+        err => this.showErrorMessage(err)
+      );
+
   }
 
 
@@ -129,16 +140,11 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  private setDocument(document: SearchResultDataItem[]): void {
-    this.document = document;
-  }
-
-
   private validate(): boolean {
-    if (this.selectedDocumentItemType === DocumentItemType.empty) {
+    if (this.searchDocument.type === DocumentItemType.empty) {
       return false;
     }
-    if (this.itemUID.length === 0) {
+    if (this.searchDocument.uid.length === 0) {
       this.hasError = true;
       this.errorMessage = 'El ' + this.selectedDocumentItemName + ' se encuentra en blanco.';
       return false;
@@ -151,30 +157,30 @@ export class SearchFormComponent implements OnInit {
 
 
   private validatePatterns(): boolean {
-    switch (this.selectedDocumentItemType) {
+    switch (this.searchDocument.type) {
       case DocumentItemType.resource:
-        if (this.itemUID.length !== 19 && this.itemUID.length !== 14) {
+        if (this.searchDocument.uid.length !== 19 && this.searchDocument.uid.length !== 14) {
           this.showValidatePatternsError();
           return false;
         }
         break;
 
       case DocumentItemType.transaction:
-        if (this.itemUID.length !== 14 && this.itemUID.length !== 16) {
+        if (this.searchDocument.uid.length !== 14 && this.searchDocument.uid.length !== 16) {
           this.showValidatePatternsError();
           return false;
         }
         break;
 
       case DocumentItemType.certificate:
-        if (this.itemUID.length !== 20) {
+        if (this.searchDocument.uid.length !== 20) {
           this.showValidatePatternsError();
           return false;
         }
         break;
 
       case DocumentItemType.document:
-        if (this.itemUID.length !== 20) {
+        if (this.searchDocument.uid.length !== 20) {
           this.showValidatePatternsError();
           return false;
         }

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from '@app/core';
 
 import { Assertion } from '@app/core';
-import { SearchResultDataItem } from '../models/search-result-data-item';
+import { SearchResultDataItem } from '../models/models';
 
 
 @Injectable()

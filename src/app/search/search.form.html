@@ -19,7 +19,7 @@
 
 				<div class="row">
 					<div class="columns">
-						<select id="searchBox" #selectBox style='width:308px' [ngModel]="selectedDocumentItemType" name='cboDocumentItemType' (change)="setDocumentItem(selectBox.value)">
+						<select id="searchBox" #selectBox style='width:308px' [ngModel]="searchDocument.type" name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
 							<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
 							<option value="{{DocumentItemType.certificate}}">Un certificado</option>
 							<option value="{{DocumentItemType.document}}">Un documento inscrito (sello registral)</option>
@@ -37,8 +37,8 @@
 
 				<div class="row">
 					<div class="columns small-12 small-centered">
-						<input style='width:308px;margin:auto' type="text" (input)="itemUID=$event.target.value.toUpperCase()" value="{{itemUID}}"
-							placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue" (keydown.enter)="searchDocument()">
+						<input style='width:308px;margin:auto' type="text" (input)="searchDocument.uid=$event.target.value.toUpperCase()" value="{{searchDocument.uid}}"
+							placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue" (keydown.enter)="onSearchDocument()">
 					</div>
 				</div>
 
@@ -49,7 +49,7 @@
 							<label><a (click)="clearForm()">Limpiar datos</a></label>
 						</span>
 						<span style="float:right">
-							<a class="button" (click)="searchDocument()">Consultar</a>
+							<a class="button" (click)="onSearchDocument()">Consultar</a>
 						</span>
 					</div>
 				</div>

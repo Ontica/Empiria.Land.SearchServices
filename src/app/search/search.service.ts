@@ -6,19 +6,11 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { SearchResultDataItem } from './models/search-result-data-item';
+import {  DocumentItemType, SearchResultDataItem } from './models/models';
 
 import { SearchApiHttpProvider } from './providers/search-api.http.provider';
-
-
-export enum DocumentItemType {
-  empty = 0,
-  resource = 1,
-  transaction = 2,
-  certificate = 4,
-  document = 8
-}
 
 @Injectable()
 export class SearchService {
@@ -26,18 +18,17 @@ export class SearchService {
   constructor(private provider: SearchApiHttpProvider) { }
 
 
-  electronicDelivery(uid: string, hashcode: string, msg: string): Promise<SearchResultDataItem[]> {    
+  getElectronicDelivery(uid: string, hashcode: string, msg: string): Observable<SearchResultDataItem[]> {    
 
-    return this.provider.getElectronicDeliver(uid, hashcode, msg).toPromise();
+    return this.provider.getElectronicDeliver(uid, hashcode, msg);
   }
 
 
-  getDocument(documentType: DocumentItemType, uid: string,
-              hashcode: string, msg: string): Promise<SearchResultDataItem[]> {
+  getDocument(documentType: DocumentItemType, uid: string): Observable<SearchResultDataItem[]> {
 
     const dataOperationUID = this.getOperationName(documentType);     
       
-    return this.getList(dataOperationUID,uid);   
+    return this.getOperation(dataOperationUID,uid);   
   }
   
 
@@ -64,20 +55,20 @@ export class SearchService {
 
   }
 
-  private getList(dataOperationUID: string, uid: string ): Promise<SearchResultDataItem[]> {
+  private getOperation(dataOperationUID: string, uid: string ): Observable<SearchResultDataItem[]> {
     switch (dataOperationUID) {
 
       case 'getResource':
-        return this.provider.getResource(uid).toPromise();
+        return this.provider.getResource(uid); 
 
       case 'getTransaction':
-        return this.provider.getTransaction(uid).toPromise();
+        return this.provider.getTransaction(uid);
 
       case 'getCertificate':
-        return this.provider.getCertificate(uid).toPromise();
+        return this.provider.getCertificate(uid);
 
       case 'getDocument':
-        return this.provider.getDocument(uid).toPromise();
+        return this.provider.getDocument(uid);
 
       default:
         throw new Error('Invalid document type');

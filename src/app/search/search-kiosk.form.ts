@@ -7,8 +7,8 @@
 
 import { Component } from '@angular/core';
 
-import { SearchService, DocumentItemType } from './search.service';
-import { SearchResultDataItem } from './models/search-result-data-item';
+import { DocumentItemType, SearchResultDataItem } from './models/models';
+import { SearchService } from './search.service';
 
 interface SearchData {
    type: DocumentItemType;
@@ -29,7 +29,7 @@ export class SearchKioskComponent {
 
   constructor(private searchService: SearchService) { }
 
-  onsearch(): void {
+  onSearch(): void {
     if (this.searchText.length === 0) {
       return;
     }
@@ -157,10 +157,16 @@ export class SearchKioskComponent {
   private searchDocument(data: SearchData): void {
     this.document = [];
 
-    this.searchService.getDocument(data.type,
-                                   data.uid, data.hash, '')
+    /*this.searchService.getDocument(data.type,
+                                   data.uid)
                       .then(x => this.document = x)
-                      .catch(x => this.showErrorMessage(x));
+                      .catch(x => this.showErrorMessage(x));*/
+    
+    this.searchService.getDocument(data.type, data.uid)
+      .subscribe((x => this.document =x),
+        err => this.showErrorMessage(err)
+      );                  
+
   }
 
 
