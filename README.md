@@ -1,53 +1,27 @@
-﻿# Empiria Land Search Services
+# Searchservices
 
-## Overview
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
-Empiria Land Search Services is an e-government portal used to search and validate data in real time about recording documents, real estate, issued certificates, requested filings, and other recordable information, concerning with a Recorder of Lands Office.
+## Development server
 
-## Quick start
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-This project is being built with Angular 10 and TypeScript 4.0
+## Code scaffolding
 
-It uses [Angular CLI](https://github.com/angular/angular-cli), so both the CLI and generated project, have dependencies that require Node 10.16 or higher, together with NPM 6.9 or higher.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-**Make sure you haveNode version >= 10.16 and NPM >= 6.9**
+## Build
 
-**Then install [Angular CLI](https://github.com/angular/angular-cli)** (globally if possible), ensuring that you have installed **version 10.1** or higher.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-```bash
-# install Angular CLI globally
-npm install -g @angular/cli
+## Running unit tests
 
-# check Angular CLI, Angular and TypeScript versions
-ng --version
-```
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-After that, please download and install this repo:
+## Running end-to-end tests
 
-```bash
-# clone (or fork) this repo
-git clone https://github.com/Ontica/Empiria.Land.SearchServices
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-# change directory
-cd Empiria.Land.SearchServices
+## Further help
 
-# install the repo with npm
-npm install
-
-# Use Angular CLI to start the server
-ng serve --open
-```
-
-By default, you have to navigate to [http://localhost:4200](http://localhost:4200) to see the application running.
-
-## Backend access
-
-In order to run this application, you MUST have a valid API KEY and access credentials to connect to the system's backend. Please request them by sending us an email.
-
-## License
-
-This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Empiria.Land.SearchServices/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
-
-## Copyright
-
-Copyright © 2016-2020. La Vía Óntica SC, Ontica LLC and contributors.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

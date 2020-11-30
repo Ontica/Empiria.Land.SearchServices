@@ -37,7 +37,7 @@
 
 				<div class="row">
 					<div class="columns small-12 small-centered">
-						<input style='width:308px;margin:auto' type="text" (input)="searchDocument.uid=$event.target.value.toUpperCase()" value="{{searchDocument.uid}}"
+						<input style='width:308px;margin:auto' #documentID type="text" (input)="searchDocument.uid=documentID.value.toUpperCase()" value="{{searchDocument.uid}}"
 							placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue" (keydown.enter)="onSearchDocument()">
 					</div>
 				</div>
