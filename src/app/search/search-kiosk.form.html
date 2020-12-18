@@ -1,70 +1,67 @@
 <form>
-	<div class="row contenedor-transparencia">
-		<div class="small-12 small-centered text-center columns">
 
-      <div class="row">
-        <div class="columns" style='padding-top:1.0em'>
-          <div class='mainTitle'>Escanee el código de barras o QR de su documento o predio</div>
-        </div>
-      </div>
+	<div class="contenedor-transparencia" fxLayout="column" fxLayoutAlign="center center">	 	
+     
+        <div style='padding-top:1.0em'fxFlexAlign="center"fxFlex="100%" >
+          <div class='mainTitle' >Escanee el código de barras o QR de su documento o predio</div>
+        </div>      
 
-			<fieldset>
+		<fieldset style="border: none;">
+		
+			<div fxFlexAlign="center">
 
-				<div class="row">
-					<div class="columns small-12 small-centered">
-            <input id="txtSearchText" name='txtSearchText' type="text" [(ngModel)]="searchText"
-                   style='width:308px;margin:auto' autofocus='true' autocomplete='off'
-                   placeholder="Escanee el código de su documento" onblur='this.focus();'
-                   (keydown.enter)="onSearch()">
-					</div>
-				</div>
-
-			</fieldset>
-
-  	</div>
+            	<input id="txtSearchText" name='txtSearchText' type="text" [(ngModel)]="searchText"
+                  	style='width:308px;margin:auto' autofocus='true' autocomplete='off'
+                   	placeholder="Escanee el código de su documento" onblur='this.focus();'
+					  (keydown.enter)="onSearch()">
+					  
+			</div>		
+			
+		</fieldset>
+  	
 	</div>
+
 </form>
 
 <div *ngIf="document.length !== 0 || errorMessage.length != 0">&nbsp;</div>
 
-<div class="row small-collapse contenedor-transparencia" *ngIf="document.length !== 0">
-	<div class="columns small-12 small-centered">
-		<div class="row small-collapse" *ngFor="let documentItem of document">
+<div *ngIf="document.length !== 0">
+	
+	<div  *ngFor="let documentItem of document">
 
-			<div *ngIf="documentItem.style.startsWith('section')">
-				<div class="columns medium-12 large-10 small-centered">
-					<div>&nbsp;</div>
-					<div [ngClass]="documentItem.style">{{documentItem.name}}</div>
-				</div>
+		<div *ngIf="documentItem.style.startsWith('section')">
+
+			<div fxLayout="row wrap"  fxLayout.xs="column" fxLayoutAlign="center center">
+				<div>&nbsp;</div>
+				<div [ngClass]="documentItem.style" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="80">{{documentItem.name}}</div>
 			</div>
 
-			<div *ngIf="!documentItem.style.startsWith('section')">
-				<div class="columns hide-for-medium">
-					<label class='small-label'>{{documentItem.name}}</label>
-				</div>
-				<div class="columns medium-3 large-2 large-offset-1 show-for-medium">
-					<label class='left-indented'>{{documentItem.name}}:</label>
-				</div>
-				<div class="columns medium-9 large-8 large-pull-1">
-					<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
-				</div>
-      </div>
-
 		</div>
-	</div>
+			
+		<div *ngIf="!documentItem.style.startsWith('section')" iv fxLayout="row wrap"fxLayout.xs="column" 
+			fxLayoutAlign="center center">
+			
+			<div [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="18">
+				<label class='small-label'>{{documentItem.name}}</label>
+			</div>
+				
+			<div [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="60">
+				<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
+			</div>
+
+   		</div>
+
+	</div>	
+
 </div>
 
-<div class="row small-collapse contenedor-rojo" *ngIf="errorMessage.length !== 0">
 
-	<div class="columns small-12 small-centered">
+<div fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="center center">
 
-		<div class="row small-collapse">
-			<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
-		</div>
+	<div class="contenedor-rojo" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}" *ngIf="errorMessage.length !== 0">		
 
-		<div class="row small-collapse" style='padding:1.0em' [innerHtml]="errorMessage">
-
-		</div>
+		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>			
+		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>				
 
 	</div>
 

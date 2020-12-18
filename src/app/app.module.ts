@@ -19,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandSearchServicesModule } from './search/land-search-services.module';
 import { SharedModule } from './shared/shared.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [ AppComponent ],
@@ -30,6 +32,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     CoreModule,
     LandSearchServicesModule,
+    FlexLayoutModule,
     SharedModule.forRoot(),
 
     AppRoutingModule

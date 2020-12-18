@@ -1,17 +1,21 @@
-<header class='header_desarrollo text-center'>
-  <img class='header_desarrollo' src='{{mainLogo}}' alt='Construir y crecer juntos' />
+<header class='header_desarrollo' style="text-align: center;">
+
+  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="0.5%"  fxLayoutAlign="center">
+    <img class='header_desarrollo'  src='{{mainLogo}}' alt='Construir y crecer juntos' />  
+  </div>   
+  
 </header>
 
 
-<div class="menu_prin_vc text-center">
-  <span class="titulo_principal show-for-medium">Dirección de Notarías y Registros Públicos</span>
+<div class="menu_prin_vc" style="text-align: center;" fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
+<span class="titulo_principal" fxHide fxShow.gt-xs>Dirección de Notarías y Registros Públicos</span>
 
-  <span class="titulo_principal hide-for-medium">Registro Público</span>
+<span class="titulo_principal" fxHide fxShow.lt-sm>Registro Público</span>
 
 </div>
 
-<div class='show-for-medium'>
-  &nbsp;
+<div fxHide fxShow.gt-xs>
+&nbsp;
 </div>
 
 <router-outlet></router-outlet>
@@ -19,27 +23,38 @@
 <br />
 
 
-<div class="row footer-separator">
-  <div class="columns small-6">
-    <a href='http://www.tlaxcala.gob.mx/' target='_blank'>
-      <img src="{{secondaryLogo}}" alt="" title="Secretaría de Gobierno del Estado de Tlaxcala" />
-    </a>
-  </div>
-  <div class="columns small-6 text-right">
-    <a href='http://contraloria.tlaxcala.gob.mx/pdf/contenidob1.pdf' target='_blank'>
-      <img src="{{advertisementImage}}" alt="" title="Encuentro de dos culturas" />
-    </a>
-  </div>
+<div fxLayout="row"  fxLayoutAlign="center center">
+
+
+  <div class="footer-separator" fxFlex="100" fxFlex.gt-md="80" >
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+       <a href='http://www.tlaxcala.gob.mx/' target='_blank'>
+         <img src="{{secondaryLogo}}" alt="" title="Secretaría de Gobierno del Estado de Tlaxcala" />
+       </a>
+  
+       <a href='http://contraloria.tlaxcala.gob.mx/pdf/contenidob1.pdf' target='_blank'>
+         <img src="{{advertisementImage}}" alt="" title="Encuentro de dos culturas" />
+       </a>
+
+     </div>
+
+   </div>
+
 </div>
 
 
-<footer class="row small-collapse">
-  <div class='show-for-medium copyright'>
+<footer  fxLayout="row" fxLayout.sm="column"  fxLayoutAlign="center center">  
+
+  <div class='copyright' fxFlex="80" fxFlex.gt-xs="80" fxHide fxShow.gt-xs fxFlexAlign="start" > 
     &copy; 2020. Dirección de Notarías y Registros Públicos. Secretaría de Gobierno del Estado de Tlaxcala.
   </div>
-  <div class='hide-for-medium copyright'>
+  
+  <div class='copyright' fxFlex="100" fxFlex.gt-xs="80" fxFlexAlign="start" fxHide fxShow.lt-sm> 
     &copy; Secretaría de Gobierno del Estado de Tlaxcala.
   </div>
+
 </footer>
 
 <br /><br /><br />&nbsp;
