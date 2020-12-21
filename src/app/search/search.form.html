@@ -1,41 +1,44 @@
 <form>
 	<div class="contenedor-transparencia">
-		
-			<fieldset style="border: none;"> 	
 
-			<div fxLayout="column" fxLayoutAlign="start center">		
+		<fieldset style="border: none;">
+
+			<div fxLayout="column" fxLayoutAlign="start center">
 				<div fxFlexAlign="center" style='padding-top:1.0em'>
-					<div class='mainTitle'>Consulta y verificación de predios, trámites y documentos</div>					
-				</div>
-				
-				<div style="text-align: center;">					
-					<label for="searchBox">¿Qué desea consultar o verificar?</label>						
+					<div class='mainTitle'>Consulta y verificación de predios, trámites y documentos</div>
 				</div>
 
-				<div style="text-align:center;">				
-					<select id="searchBox" #selectBox style='width:308px;' [ngModel]="searchDocument.type" name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
+				<div style="text-align: center;">
+					<label for="searchBox">¿Qué desea consultar o verificar?</label>
+				</div>
+
+				<div style="text-align:center;">
+					<select id="searchBox" #selectBox style='width:308px;' [ngModel]="searchDocument.type"
+						name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
 						<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
 						<option value="{{DocumentItemType.certificate}}">Un certificado</option>
 						<option value="{{DocumentItemType.document}}">Un documento inscrito (sello registral)</option>
 						<option value="{{DocumentItemType.resource}}">Un predio o sociedad (folio real)</option>
 						<option value="{{DocumentItemType.transaction}}">Un trámite</option>
-					</select>				
+					</select>
 				</div>
 
-				<div style="text-align:center;">				
-					<label for="searchValue">{{selectedDocumentItemName}}:</label>				
+				<div style="text-align:center;">
+					<label for="searchValue">{{selectedDocumentItemName}}:</label>
 				</div>
 
-				<div style="text-align:center;">				
-					<input style='width:308px;margin:auto' type="text" #documentID (input)="searchDocument.uid=documentID.value.toUpperCase()" value="{{searchDocument.uid}}"
-						placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue" (keydown.enter)="onSearchDocument()">				
+				<div style="text-align:center;">
+					<input style='width:308px;margin:auto' type="text" #documentID
+						(input)="searchDocument.uid=documentID.value.toUpperCase()" value="{{searchDocument.uid}}"
+						placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue"
+						(keydown.enter)="onSearchDocument()">
 				</div>
 
-			</div>				
-		
-			<div  fxLayout="column" fxLayoutAlign="center center">
+			</div>
 
-				<div style='width:326px; '>	 
+			<div fxLayout="column" fxLayoutAlign="center center">
+
+				<div style='width:326px; '>
 					<span style="float:left">
 						<label><a (click)="clearForm()">Limpiar datos</a></label>
 					</span>
@@ -44,69 +47,67 @@
 						<a class="button" (click)="onSearchDocument()">Consultar</a>
 					</span>
 
-				</div>			  
+				</div>
 
-			</div>			
-						
-			</fieldset>		
+			</div>
 
-	</div>	
-   
+		</fieldset>
+
+	</div>
+
 </form>
 
 <div *ngIf="document.length !== 0 || hasError">&nbsp;</div>
 
 <div class="contenedor-transparencia" *ngIf="document.length !== 0">
-	
-		<div *ngFor="let documentItem of document" >
 
-		 	<div *ngIf="documentItem.style.startsWith('section')">
+	<div *ngFor="let documentItem of document">
 
-				<div fxLayout="row wrap"  fxLayout.xs="column" 
-				 fxLayoutAlign="center center">
-					<div>&nbsp;</div>
-					<div  [ngClass]="documentItem.style" [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="80" 
-					>{{documentItem.name}}</div>
-					
-					
-				</div>
+		<div *ngIf="documentItem.style.startsWith('section')">
+
+			<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
+				<div>&nbsp;</div>
+				<div [ngClass]="documentItem.style" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="80">{{documentItem.name}}</div>
+
+
 			</div>
-			
-			<div *ngIf="!documentItem.style.startsWith('section')">
-
-				<div fxLayout="row wrap"  fxLayout.xs="column" fxLayoutAlign="center center">
-				
-					<div  [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="18">
-						<label class='small-label'>{{documentItem.name}}:</label>
-					</div>	
-							
-					<div *ngIf="documentItem.style !== 'command'"  [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="60">
-						<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
-        			</div>				
-				
-					<div *ngIf="documentItem.style === 'command'" [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="60">
-						<div>
-            				<a *ngIf="documentItem.value === 'ELECTRONIC_DELIVERY_COMMAND'"
-               					class="button" (click)="onElectronicDelivery()">Quiero recibir el trámite electrónicamente</a>
-          				</div>
-					</div>
-
-				</div>						
-
-			</div> 
-			
 		</div>
-	
+
+		<div *ngIf="!documentItem.style.startsWith('section')">
+
+			<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
+
+				<div [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="18">
+					<label class='small-label'>{{documentItem.name}}:</label>
+				</div>
+
+				<div *ngIf="documentItem.style !== 'command'" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="60">
+					<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
+				</div>
+
+				<div *ngIf="documentItem.style === 'command'" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="60">
+					<div>
+						<a *ngIf="documentItem.value === 'ELECTRONIC_DELIVERY_COMMAND'" class="button"
+							(click)="onElectronicDelivery()">Quiero recibir el trámite electrónicamente</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
 
 </div>
 
 <div fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="center center">
 
-	<div class="contenedor-rojo"  *ngIf="hasError" fxFlex.gt-xs="80"  [ngStyle.xs]="{'width':'90%'}" >		
-			
-		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>			
-		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>			
-	
+	<div class="contenedor-rojo" *ngIf="hasError" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}">
+
+		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
+		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>
+
 	</div>
 
 </div>

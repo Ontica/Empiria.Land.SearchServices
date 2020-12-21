@@ -1,24 +1,23 @@
 <form>
 
-	<div class="contenedor-transparencia" fxLayout="column" fxLayoutAlign="center center">	 	
-     
-        <div style='padding-top:1.0em'fxFlexAlign="center"fxFlex="100%" >
-          <div class='mainTitle' >Escanee el código de barras o QR de su documento o predio</div>
-        </div>      
+	<div class="contenedor-transparencia" fxLayout="column" fxLayoutAlign="center center">
+
+		<div style='padding-top:1.0em' fxFlexAlign="center" fxFlex="100%">
+			<div class='mainTitle'>Escanee el código de barras o QR de su documento o predio</div>
+		</div>
 
 		<fieldset style="border: none;">
-		
+
 			<div fxFlexAlign="center">
 
-            	<input id="txtSearchText" name='txtSearchText' type="text" [(ngModel)]="searchText"
-                  	style='width:308px;margin:auto' autofocus='true' autocomplete='off'
-                   	placeholder="Escanee el código de su documento" onblur='this.focus();'
-					  (keydown.enter)="onSearch()">
-					  
-			</div>		
-			
+				<input id="txtSearchText" name='txtSearchText' type="text" [(ngModel)]="searchText"
+					style='width:308px;margin:auto' autofocus='true' autocomplete='off'
+					placeholder="Escanee el código de su documento" onblur='this.focus();' (keydown.enter)="onSearch()">
+
+			</div>
+
 		</fieldset>
-  	
+
 	</div>
 
 </form>
@@ -26,42 +25,44 @@
 <div *ngIf="document.length !== 0 || errorMessage.length != 0">&nbsp;</div>
 
 <div *ngIf="document.length !== 0">
-	
-	<div  *ngFor="let documentItem of document">
+
+	<div *ngFor="let documentItem of document">
 
 		<div *ngIf="documentItem.style.startsWith('section')">
 
-			<div fxLayout="row wrap"  fxLayout.xs="column" fxLayoutAlign="center center">
+			<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
 				<div>&nbsp;</div>
-				<div [ngClass]="documentItem.style" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="80">{{documentItem.name}}</div>
+				<div [ngClass]="documentItem.style" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="80">
+					{{documentItem.name}}
+				</div>
 			</div>
 
 		</div>
-			
-		<div *ngIf="!documentItem.style.startsWith('section')" iv fxLayout="row wrap"fxLayout.xs="column" 
+
+		<div *ngIf="!documentItem.style.startsWith('section')" iv fxLayout="row wrap" fxLayout.xs="column"
 			fxLayoutAlign="center center">
-			
-			<div [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="18">
+
+			<div [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="18">
 				<label class='small-label'>{{documentItem.name}}</label>
 			</div>
-				
-			<div [ngStyle.xs]="{'width':'90%'}"   fxFlex.gt-xs="60">
+
+			<div [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="60">
 				<div [ngClass]="'label-value ' + documentItem.style" [innerHtml]='documentItem.value'></div>
 			</div>
 
-   		</div>
+		</div>
 
-	</div>	
+	</div>
 
 </div>
 
 
 <div fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="center center">
 
-	<div class="contenedor-rojo" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}" *ngIf="errorMessage.length !== 0">		
+	<div class="contenedor-rojo" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}" *ngIf="errorMessage.length !== 0">
 
-		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>			
-		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>				
+		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
+		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>
 
 	</div>
 
