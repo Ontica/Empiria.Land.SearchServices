@@ -1,3 +1,8 @@
+$font-base: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+$section-background-color: #306d4e;
+$primary-color:  darkgreen;
+$secondary-color: darkred;
+
 html,
 body,
 div {
@@ -60,20 +65,20 @@ img {
 
 .contenedor-rojo {
   background-color: LavenderBlush;
-  color: darkred;
-  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  color: $secondary-color;
+  font-family: $font-base;
   font-weight: 400;
   border: 2px FireBrick solid;
 }
 
 .contenedor-rojo * {
   background-color: LavenderBlush;
-  color: darkred;
+  color: $secondary-color;
   font-weight: 400;
 }
 
 .footer-separator {
-  border-top: 1px solid darkred;
+  border-top: 1px solid $secondary-color;
   padding-top: 1em;
 }
 
@@ -87,7 +92,7 @@ img {
 }
 
 a {
-  color: darkgreen;
+  color: $primary-color;
   font-weight: 500;
   text-decoration: none;
   line-height: inherit;
@@ -149,7 +154,7 @@ input, select {
 .label-value {
   color: #333;
   font-size: 0.95em;
-  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-family: $font-base;
   padding: 0;
 }
 
@@ -159,7 +164,7 @@ input, select {
 
 .section {
   color: white;
-  background-color: #306d4e;
+  background-color: $section-background-color;
   padding: 0.25em;
   padding-left: 0.75em;
   border-radius: 0 0 6px 0;
@@ -167,7 +172,7 @@ input, select {
 
 .section-error {
   color: white;
-  background-color: darkred;
+  background-color: $secondary-color;
   padding: 0.25em;
   padding-left: 0.75em;
   border-radius: 0 0 6px 0;
@@ -175,20 +180,20 @@ input, select {
 
 
 .warning-status-text {
-  color: darkred;
+  color: $secondary-color;
   font-weight: 600;
 }
 
 .ok-status-text {
-  color: darkgreen;
+  color: $primary-color;
 }
 
 .ok-status-text div {
-  color: darkgreen;
+  color: $primary-color;
 }
 
 b {
-  color: darkgreen;
+  color: $primary-color;
 }
 
 .in-process-status-text {
@@ -211,7 +216,7 @@ b {
 
 label {
   color: #8a8a8a;
-  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-family: $font-base;
   padding-bottom: 0;
 }
 
@@ -220,7 +225,7 @@ label {
   font-size: 0.85em;
   padding-bottom: 0;
   padding-top: 0.5em;
-  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-family: $font-base;
 }
 
 .left-indented {
@@ -230,14 +235,14 @@ label {
 .button {
   display: inline-block;
   padding: 6px 12px;
-  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-family: $font-base;
   font-size: 16px;  
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
   border: none;
-  background-color: darkgreen;
+  background-color: $primary-color;
   border-radius: 6px; 
 }
 
