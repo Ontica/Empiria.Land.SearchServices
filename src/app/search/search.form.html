@@ -1,18 +1,18 @@
 <form>
 	<div class="contenedor-transparencia">
 
-		<fieldset style="border: none;">
+		<fieldset>
 
 			<div fxLayout="column" fxLayoutAlign="start center">
 				<div fxFlexAlign="center" style='padding-top:1.0em'>
 					<div class='mainTitle'>Consulta y verificación de predios, trámites y documentos</div>
 				</div>
 
-				<div style="text-align: center;">
+				<div class="text-align-center">
 					<label for="searchBox">¿Qué desea consultar o verificar?</label>
 				</div>
 
-				<div style="text-align:center;">
+				<div class="text-align-center">
 					<select id="searchBox" #selectBox style='width:308px;' [ngModel]="searchDocument.type"
 						name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
 						<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
@@ -23,11 +23,11 @@
 					</select>
 				</div>
 
-				<div style="text-align:center;">
+				<div class="text-align-center">
 					<label for="searchValue">{{selectedDocumentItemName}}:</label>
 				</div>
 
-				<div style="text-align:center;">
+				<div class="text-align-center">
 					<input style='width:308px;margin:auto' type="text" #documentID
 						(input)="searchDocument.uid=documentID.value.toUpperCase()" value="{{searchDocument.uid}}"
 						placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue"
@@ -105,7 +105,7 @@
 
 	<div class="contenedor-rojo" *ngIf="hasError" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}">
 
-		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
+		<div class="firebrick-header">Hay un problema</div>
 		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>
 
 	</div>

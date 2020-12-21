@@ -6,7 +6,7 @@
 			<div class='mainTitle'>Escanee el código de barras o QR de su documento o predio</div>
 		</div>
 
-		<fieldset style="border: none;">
+		<fieldset>
 
 			<div fxFlexAlign="center">
 
@@ -39,7 +39,7 @@
 
 		</div>
 
-		<div *ngIf="!documentItem.style.startsWith('section')" iv fxLayout="row wrap" fxLayout.xs="column"
+		<div *ngIf="!documentItem.style.startsWith('section')" fxLayout="row wrap" fxLayout.xs="column"
 			fxLayoutAlign="center center">
 
 			<div [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="18">
@@ -61,7 +61,7 @@
 
 	<div class="contenedor-rojo" fxFlex.gt-xs="80" [ngStyle.xs]="{'width':'90%'}" *ngIf="errorMessage.length !== 0">
 
-		<div style="background-color:FireBrick;color:white;padding:0.5em">Hay un problema</div>
+		<div class="firebrick-header">Hay un problema</div>
 		<div style='padding:1.0em' [innerHtml]="errorMessage"></div>
 
 	</div>
