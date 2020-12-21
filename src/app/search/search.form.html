@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="text-align-center">
-					<input style='width:308px;margin:auto' type="text" #documentID
+					<input style='width:308px;margin:auto;' type="text" #documentID
 						(input)="searchDocument.uid=documentID.value.toUpperCase()" value="{{searchDocument.uid}}"
 						placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue"
 						(keydown.enter)="onSearchDocument()">
@@ -37,13 +37,13 @@
 			</div>
 
 			<div fxLayout="column" fxLayoutAlign="center center">
-
-				<div style='width:326px; '>
-					<span style="float:left">
+			
+				<div style='width:308px;'fxLayout="row" fxLayoutAlign="space-between center">
+					<span>
 						<label><a (click)="clearForm()">Limpiar datos</a></label>
 					</span>
 
-					<span style="float:right">
+					<span>
 						<a class="button" (click)="onSearchDocument()">Consultar</a>
 					</span>
 

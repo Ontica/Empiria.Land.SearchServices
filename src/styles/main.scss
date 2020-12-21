@@ -136,13 +136,14 @@ li {
   margin-top: 4px;
 }
 
-input {
+input, select {
   border: 1px solid #106cc8;
   font-size: 14px;
-  height: 2em;
+  height: 3em;
   background-color: #fcfcfc;
   outline: none;
   padding: 8px;
+  border-radius: 2px;  
 }
 
 .label-value {
@@ -227,13 +228,28 @@ label {
 }
 
 .button {
-  border-radius: 6px;
+  display: inline-block;
+  padding: 6px 12px;
+  font-family: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+  font-size: 16px;  
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
   background-color: darkgreen;
+  border-radius: 6px; 
 }
 
 .button:hover {
   background-color: #306d4e;
   text-decoration: none;
+  color: #fff;
+}
+
+.button:active {
+  background-color:  #306d4e;  
+  transform: translateY(4px);
 }
 
 .text-align-center {
@@ -248,4 +264,8 @@ label {
 
 fieldset {
   border: none;
+}
+
+input[type=text]:focus {
+  border: 3px solid  #306d4e; ;
 }
