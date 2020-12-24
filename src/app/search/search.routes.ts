@@ -6,18 +6,19 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { SearchFormComponent, SearchKioskComponent } from './index';
 
+const routes: Routes = [
+  { path: '', redirectTo:'/consultas', pathMatch: 'full' },
+  { path: 'consultas', component: SearchFormComponent },
+  { path: 'quiosco', component: SearchKioskComponent }
+  
+];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild([
-      { path: '', component: SearchFormComponent, pathMatch: 'full' },
-      { path: 'quiosco', component: SearchKioskComponent }
-    ])
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class SearchServicesRoutingModule { }

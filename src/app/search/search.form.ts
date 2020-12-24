@@ -6,7 +6,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 
 import { DocumentItemType, SearchResultDataItem } from './models/models';
 import { SearchService } from './search.service';
@@ -34,21 +34,13 @@ export class SearchFormComponent implements OnInit {
   private subscription: any;
 
 
-  constructor(private router: Router,
+  constructor(private router: Router, private route: ActivatedRoute,
               private searchService: SearchService) { }
 
 
   ngOnInit() {
-    this.subscription = this.router.routerState.root.queryParams.subscribe(params => {
-      const docType = params.type || 'empty';     
-      this.searchDocument.type = (DocumentItemType as any)[docType];
-      this.searchDocument.uid = params.uid || '';
-      this.itemHash = params.hash || undefined;
-      this.msg = params.msg || '';
-      this.selectedDocumentItemName = this.getSelectedItemName();
-      this.onSearchDocument();
-    });
-  
+       
+    this.getDocument();
 
   }
 
@@ -122,6 +114,21 @@ export class SearchFormComponent implements OnInit {
 
 
   // private methods
+
+
+  private getDocument(): void {
+
+    const docType = this.route.snapshot.queryParamMap.get('type') || 'empty';
+    this.searchDocument.type = (DocumentItemType as any)[docType];
+
+    this.searchDocument.uid = this.route.snapshot.queryParamMap.get('uid') || '';
+    this.itemHash = this.route.snapshot.queryParamMap.get('hash') || undefined;      
+    this.msg = this.route.snapshot.paramMap.get('msg') || '';
+
+    this.selectedDocumentItemName = this.getSelectedItemName();
+    this.onSearchDocument();
+
+  }
 
 
   private showErrorMessage(error: any): void {
