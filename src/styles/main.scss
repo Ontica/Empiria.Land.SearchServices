@@ -1,7 +1,10 @@
-$font-base: Segoe UI Emoji, Trebuchet MS, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
-$section-background-color: #306d4e;
-$primary-color:  darkgreen;
-$secondary-color: darkred;
+$font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$primary-color:  #7a0a0a !default;
+$menu-prin-background-color: #7a0a0a;
+$secondary-color: #2c3942 !default;
+$secondary-color-light: rgb(67, 90, 107) !default;
+$section-background-color:  $secondary-color;  
+
 
 html,
 body,
@@ -32,29 +35,21 @@ img {
 .logo {  
   max-width: 40%;
   height: auto;
+  margin-bottom: 15px;
 }
 
 .menu_prin_vc {
-  background-color: #2c3942;
+  background-color: $menu-prin-background-color;
   padding: 0.15em;
   margin: 0;
 }
 
-.titulo_principal {
-  background-color: #2c3942;
+.titulo_principal { 
   color: white;
   font-size: 1.3em;
   line-height: 1.6em;
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.logo-segob {
-  height: 2.2em;
-  padding-top: 0;
-  margin-top: -14px;
-  left: -8em;
-  position: relative;
 }
 
 .contenedor-transparencia {
@@ -72,7 +67,7 @@ img {
 .contenedor-rojo {
   background-color: LavenderBlush;
   color: $secondary-color;
-  font-family: $font-base;
+  font-family: $font-family;
   font-weight: 400;
   border: 2px FireBrick solid;
 }
@@ -98,7 +93,7 @@ img {
 }
 
 a {
-  color: $primary-color;
+  color: $secondary-color-light; 
   font-weight: 500;
   text-decoration: none;
   line-height: inherit;
@@ -107,7 +102,7 @@ a {
 }
 
 a:hover {
-  color: #003300;
+  color: #306d4e;
   text-decoration: underline;
   text-decoration: underline;
 }
@@ -160,7 +155,7 @@ input, select {
 .label-value {
   color: #333;
   font-size: 0.95em;
-  font-family: $font-base;
+  font-family: $font-family;
   padding: 0;
 }
 
@@ -174,6 +169,7 @@ input, select {
   padding: 0.25em;
   padding-left: 0.75em;
   border-radius: 0 0 6px 0;
+  font-family: $font-family;
 }
 
 .section-error {
@@ -222,7 +218,7 @@ b {
 
 label {
   color: #8a8a8a;
-  font-family: $font-base;
+  font-family: $font-family;
   padding-bottom: 0;
 }
 
@@ -231,7 +227,7 @@ label {
   font-size: 0.85em;
   padding-bottom: 0;
   padding-top: 0.5em;
-  font-family: $font-base;
+  font-family: $font-family;
 }
 
 .left-indented {
@@ -241,25 +237,25 @@ label {
 .button {
   display: inline-block;
   padding: 6px 12px;
-  font-family: $font-base;
+  font-family: $font-family;
   font-size: 16px;  
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
   border: none;
-  background-color: $primary-color;
+  background-color: $secondary-color-light; 
   border-radius: 6px; 
 }
 
 .button:hover {
-  background-color: #306d4e;
+  background-color:#306d4e;
   text-decoration: none;
   color: #fff;
 }
 
 .button:active {
-  background-color:  #306d4e;  
+  background-color: #306d4e;  
   transform: translateY(4px);
 }
 
@@ -278,5 +274,5 @@ fieldset {
 }
 
 input[type=text]:focus {
-  border: 3px solid  #306d4e; ;
+  border: 3px solid  #306d4e;
 }
