@@ -31,29 +31,12 @@ export class AppComponent {
 
   get mainLogo() {
     if (this.isDisplayVedaElectoralUI) {
-      return './assets/img/customer/main.logo.veda.png';
+      return './assets/img/customer/horizontal.logo.veda.png';
     }
   
-    return './assets/img/customer/main.logo.png';
+    return './assets/img/customer/horizontal.logo.png';
   }
-
-
-  get secondaryLogo() {
-    if (this.isDisplayVedaElectoralUI) {
-      return './assets/img/customer/secondary.logo.veda.png';
-    }
-    
-    return './assets/img/customer/secondary.logo.png';
-  }
-
-
-  get advertisementImage() {
-    if (this.isDisplayVedaElectoralUI) {
-      return './assets/img/customer/advertisement.veda.jpg';
-    }
-    
-    return './assets/img/customer/advertisement.jpg';
-  }
+  
 
   // private methods
 
