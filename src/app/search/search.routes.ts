@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchFormComponent, SearchKioskComponent } from './index';
 
 const routes: Routes = [
-  { path: '', redirectTo:'/consultas', pathMatch: 'full' },
+  { path: '', component: SearchFormComponent, pathMatch: 'full' },
   { path: 'consultas', component: SearchFormComponent },
   { path: 'quiosco', component: SearchKioskComponent }
   
