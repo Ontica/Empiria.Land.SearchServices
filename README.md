@@ -1,27 +1,59 @@
-# Searchservices
+# Empiria Land Search Services
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/71c9478a022f41a6a44e0eeefacfda22)](https://www.codacy.com/gh/Ontica/Empiria.Land.SearchServices/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ontica/Empiria.Land.SearchServices&amp;utm_campaign=Badge_Grade) &nbsp; &nbsp; [![Maintainability](https://api.codeclimate.com/v1/badges/f077757386e4fa419e77/maintainability)](https://codeclimate.com/github/Ontica/Empiria.Land.SearchServices/maintainability)
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Angular-based front-end application that offer document validation services over certificates, recording seals, real estate and associations recording. Also has filing search services that allow users to check their statuses in real-time and receive them electronically.
 
-## Code scaffolding
+Empiria Land is a software components suite that provides information services for land recording offices, cadastral departments and other land management government authorities.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Quick start
 
-## Build
+This project is being built with Angular 11 and TypeScript 4.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+It uses [Angular CLI](https://github.com/angular/angular-cli), so both the CLI and generated project, have dependencies that require Node 12 or higher, together with NPM 6 or higher.
 
-## Running unit tests
+**Make sure you have Node version >= 12 and NPM >= 6**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Then install [Angular CLI](https://github.com/angular/angular-cli)** (globally if possible), ensuring that you have installed **version 11** or higher.
 
-## Running end-to-end tests
+```bash
+# install Angular CLI globally
+npm install -g @angular/cli
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+# check Angular CLI, Angular and TypeScript versions
+ng -v
+```
 
-## Further help
+After that, please download and install this repo:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+# clone (or fork) this repo
+git clone https://github.com/Ontica/Empiria.Land.SearchServices
+
+# change directory
+cd Empiria.Land.SearchServices
+
+# install the repo with npm
+npm install
+
+# Use Angular CLI to start the server
+ng serve --open
+```
+
+By default, you have to navigate to [http://localhost:4200](http://localhost:4200) to see the application running.
+
+## Backend access
+
+In order to run this application, you MUST have a valid API KEY and access credentials to connect to the system's backend. Please request them by sending us an email.
+
+## License
+
+This web application is distributed by the [GNU AFFERO](https://github.com/Ontica/Empiria.Land.SearchServices/blob/master/LICENSE.txt) GENERAL PUBLIC LICENSE.
+
+For third-party components, please read [ThirdPartyNotices](https://github.com/Ontica/Empiria.Land.SearchServices/blob/master/ThirdPartyNotices.txt) file.
+
+## Copyright
+
+Copyright © 2009-2021. La Vía Óntica SC, Ontica LLC and contributors.

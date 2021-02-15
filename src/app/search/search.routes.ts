@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: '', component: SearchFormComponent, pathMatch: 'full' },
   { path: 'consultas', component: SearchFormComponent },
   { path: 'quiosco', component: SearchKioskComponent }
-  
+
 ];
 
 @NgModule({

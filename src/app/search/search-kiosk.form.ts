@@ -161,11 +161,11 @@ export class SearchKioskComponent {
                                    data.uid)
                       .then(x => this.document = x)
                       .catch(x => this.showErrorMessage(x));*/
-    
+
     this.searchService.getDocument(data.type, data.uid)
       .subscribe((x => this.document =x),
         err => this.showErrorMessage(err)
-      );                  
+      );
 
   }
 

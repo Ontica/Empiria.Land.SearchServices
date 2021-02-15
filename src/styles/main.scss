@@ -3,8 +3,7 @@ $primary-color:  #7a0a0a !default;
 $menu-prin-background-color: #7a0a0a;
 $secondary-color: #2c3942 !default;
 $secondary-color-light: rgb(67, 90, 107) !default;
-$section-background-color:  $secondary-color;  
-
+$section-background-color: $secondary-color;
 
 html,
 body,
@@ -20,11 +19,11 @@ div {
   line-height: 1.5em;
   color: #333;
   font-size: 1em;
+  font-family: $font-family;
 }
 
 img {
   background-color: transparent;
-  
 }
 
 .header_desarrollo {
@@ -32,9 +31,9 @@ img {
   margin: 0;
 }
 
-.logo {  
+.logo {
+  width: 420px;
   max-width: 40%;
-  height: auto;
   margin-bottom: 15px;
 }
 
@@ -44,7 +43,7 @@ img {
   margin: 0;
 }
 
-.titulo_principal { 
+.titulo_principal {
   color: white;
   font-size: 1.3em;
   line-height: 1.6em;
@@ -93,9 +92,8 @@ img {
 }
 
 a {
-  color: $secondary-color-light; 
+  color: $secondary-color-light;
   font-weight: 500;
-  text-decoration: none;
   line-height: inherit;
   cursor: pointer;
   text-decoration: underline;
@@ -103,7 +101,6 @@ a {
 
 a:hover {
   color: #306d4e;
-  text-decoration: underline;
   text-decoration: underline;
 }
 
@@ -142,14 +139,15 @@ li {
   margin-top: 4px;
 }
 
-input, select {
+input,
+select {
   border: 1px solid #106cc8;
   font-size: 14px;
   height: 3em;
   background-color: #fcfcfc;
   outline: none;
   padding: 8px;
-  border-radius: 2px;  
+  border-radius: 2px;
 }
 
 .label-value {
@@ -179,7 +177,6 @@ input, select {
   padding-left: 0.75em;
   border-radius: 0 0 6px 0;
 }
-
 
 .warning-status-text {
   color: $secondary-color;
@@ -238,14 +235,14 @@ label {
   display: inline-block;
   padding: 6px 12px;
   font-family: $font-family;
-  font-size: 16px;  
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
   border: none;
-  background-color: $secondary-color-light; 
-  border-radius: 6px; 
+  background-color: $secondary-color-light;
+  border-radius: 6px;
 }
 
 .button:hover {
@@ -255,7 +252,7 @@ label {
 }
 
 .button:active {
-  background-color: #306d4e;  
+  background-color: #306d4e;
   transform: translateY(4px);
 }
 

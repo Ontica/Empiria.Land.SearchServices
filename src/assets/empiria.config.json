@@ -1,18 +1,18 @@
 {
-    "appName": "Empiria Land Intranet Search Services",
-    "version": "5.0.0-alpha.1",
-    "date": "2020-11-23",
-    "settings": [{
-        "key": "APPLICATION_KEY",
-        "value": "YOUR_API_KEY"
-      },
-      {
-        "key": "HTTP_API_BASE_ADDRESS",
-        "value": "https://registropublico.tlaxcala.gob.mx/services/"
-      },
-      {
-        "key": "displayVedaElectoralUI",
-        "value": false
-      }
-    ]
-  }
+  "appName": "Empiria Land Intranet Search Services",
+  "version": "5.0.0-beta.0",
+  "date": "2021-02-14",
+  "settings": [{
+      "key": "APPLICATION_KEY",
+      "value": "YOUR_API_KEY"
+    },
+    {
+      "key": "HTTP_API_BASE_ADDRESS",
+      "value": "http://empiria.land/api/"
+    },
+    {
+      "key": "displayVedaElectoralUI",
+      "value": false
+    }
+  ]
+}

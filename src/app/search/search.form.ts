@@ -13,7 +13,7 @@ import { SearchService } from './search.service';
 
 interface SearchData {
   type: DocumentItemType;
-  uid: string;  
+  uid: string;
 }
 
 @Component({
@@ -24,9 +24,9 @@ interface SearchData {
 export class SearchFormComponent implements OnInit {
 
   searchDocument: SearchData = { type: 0, uid: ''}
-  DocumentItemType = DocumentItemType;  
+  DocumentItemType = DocumentItemType;
   selectedDocumentItemName = 'Consultar';
-  document: SearchResultDataItem[];  
+  document: SearchResultDataItem[];
   itemHash = '';
   msg = '';
   hasError = false;
@@ -39,21 +39,21 @@ export class SearchFormComponent implements OnInit {
 
 
   ngOnInit() {
-       
+
     this.getDocument();
 
   }
 
 
-  onSelectDocumentItem(selectedValue: string) {   
+  onSelectDocumentItem(selectedValue: string) {
     this.searchDocument.type =  Number(selectedValue);
     this.selectedDocumentItemName = this.getSelectedItemName();
   }
 
 
-  getSelectedItemName(): string {   
+  getSelectedItemName(): string {
     switch(this.searchDocument.type) {
-    
+
       case DocumentItemType.empty:
         return 'Consultar';
 
@@ -81,8 +81,8 @@ export class SearchFormComponent implements OnInit {
 
     if (!this.validate()) {
       return;
-    }    
-    
+    }
+
     this.searchService.getDocument(this.searchDocument.type, this.searchDocument.uid)
       .subscribe(
         x => this.document = x,
@@ -92,7 +92,7 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  clearForm(): void {    
+  clearForm(): void {
     this.searchDocument.type = 0;
     this.searchDocument.uid  = '';
     this.document = [];
@@ -102,8 +102,8 @@ export class SearchFormComponent implements OnInit {
   }
 
 
-  onElectronicDelivery() {    
-    
+  onElectronicDelivery() {
+
     this.searchService.getElectronicDelivery(this.searchDocument.uid, this.itemHash, this.msg)
       .subscribe(
         x => this.document = x,
@@ -122,7 +122,7 @@ export class SearchFormComponent implements OnInit {
     this.searchDocument.type = (DocumentItemType as any)[docType];
 
     this.searchDocument.uid = this.route.snapshot.queryParamMap.get('uid') || '';
-    this.itemHash = this.route.snapshot.queryParamMap.get('hash') || undefined;      
+    this.itemHash = this.route.snapshot.queryParamMap.get('hash') || undefined;
     this.msg = this.route.snapshot.paramMap.get('msg') || '';
 
     this.selectedDocumentItemName = this.getSelectedItemName();
@@ -173,7 +173,9 @@ export class SearchFormComponent implements OnInit {
         break;
 
       case DocumentItemType.transaction:
-        if (this.searchDocument.uid.length !== 14 && this.searchDocument.uid.length !== 16) {
+        if (this.searchDocument.uid.length !== 14 &&
+            this.searchDocument.uid.length !== 16 &&
+            this.searchDocument.uid.length !== 19) {
           this.showValidatePatternsError();
           return false;
         }

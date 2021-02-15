@@ -18,7 +18,7 @@ export class SearchService {
   constructor(private provider: SearchApiHttpProvider) { }
 
 
-  getElectronicDelivery(uid: string, hashcode: string, msg: string): Observable<SearchResultDataItem[]> {    
+  getElectronicDelivery(uid: string, hashcode: string, msg: string): Observable<SearchResultDataItem[]> {
 
     return this.provider.getElectronicDeliver(uid, hashcode, msg);
   }
@@ -26,11 +26,11 @@ export class SearchService {
 
   getDocument(documentType: DocumentItemType, uid: string): Observable<SearchResultDataItem[]> {
 
-    const dataOperationUID = this.getOperationName(documentType);     
-      
-    return this.getOperation(dataOperationUID,uid);   
+    const dataOperationUID = this.getOperationName(documentType);
+
+    return this.getOperation(dataOperationUID,uid);
   }
-  
+
 
   // private methods
 
@@ -59,7 +59,7 @@ export class SearchService {
     switch (dataOperationUID) {
 
       case 'getResource':
-        return this.provider.getResource(uid); 
+        return this.provider.getResource(uid);
 
       case 'getTransaction':
         return this.provider.getTransaction(uid);
