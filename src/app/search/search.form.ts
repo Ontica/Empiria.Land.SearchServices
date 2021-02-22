@@ -5,7 +5,7 @@
  * See LICENSE.txt in the project root for complete license information.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit } from '@angular/core';
 import {  ActivatedRoute, Router } from '@angular/router';
 
 import { DocumentItemType, SearchResultDataItem } from './models/models';
@@ -133,14 +133,16 @@ export class SearchFormComponent implements OnInit {
 
   private showErrorMessage(error: any): void {
     this.hasError = true;
-
+   
     if (!error) {
       this.errorMessage = 'Tuve un problema al ejecutar la operación.';
-    } else if (error.errorMessage) {
+    } else if (error.error.message) {
+      this.errorMessage = (error.error.message as string).replace(/\n/g, '<br />');
+    } else if (error.errorMessage) {      
       this.errorMessage = (error.errorMessage as string).replace(/\n/g, '<br />');
-    } else if (error.message) {
+    } else if (error.message) {       
       this.errorMessage = (error.message as string).replace(/\n/g, '<br />');
-    } else if (error.data) {
+    } else if (error.data) {     
       this.errorMessage = error.data;
     }
 
