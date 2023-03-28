@@ -133,16 +133,16 @@ export class SearchFormComponent implements OnInit {
 
   private showErrorMessage(error: any): void {
     this.hasError = true;
-   
+
     if (!error) {
       this.errorMessage = 'Tuve un problema al ejecutar la operación.';
     } else if (error.error.message) {
       this.errorMessage = (error.error.message as string).replace(/\n/g, '<br />');
-    } else if (error.errorMessage) {      
+    } else if (error.errorMessage) {
       this.errorMessage = (error.errorMessage as string).replace(/\n/g, '<br />');
-    } else if (error.message) {       
+    } else if (error.message) {
       this.errorMessage = (error.message as string).replace(/\n/g, '<br />');
-    } else if (error.data) {     
+    } else if (error.data) {
       this.errorMessage = error.data;
     }
 
@@ -191,7 +191,8 @@ export class SearchFormComponent implements OnInit {
         break;
 
       case DocumentItemType.document:
-        if (this.searchDocument.uid.length !== 20) {
+        if (this.searchDocument.uid.length !== 20 &&
+            this.searchDocument.uid.length !== 24) {
           this.showValidatePatternsError();
           return false;
         }
