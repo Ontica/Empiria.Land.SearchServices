@@ -26,54 +26,25 @@ export class SearchService {
 
   getDocument(documentType: DocumentItemType, uid: string): Observable<SearchResultDataItem[]> {
 
-    const dataOperationUID = this.getOperationName(documentType);
-
-    return this.getOperation(dataOperationUID,uid);
-  }
-
-
-  // private methods
-
-  private getOperationName(documentType: DocumentItemType): string {
     switch (documentType) {
 
-      case DocumentItemType.resource:
-        return 'getResource';
-
-      case DocumentItemType.transaction:
-        return 'getTransaction';
-
-      case DocumentItemType.certificate:
-        return 'getCertificate';
-
-      case DocumentItemType.document:
-        return 'getDocument';
-
-      default:
-        throw new Error('Invalid document type');
-    }
-
-  }
-
-  private getOperation(dataOperationUID: string, uid: string ): Observable<SearchResultDataItem[]> {
-    switch (dataOperationUID) {
-
-      case 'getResource':
+      case DocumentItemType.property:
+      case DocumentItemType.association:
+      case DocumentItemType.noproperty:
         return this.provider.getResource(uid);
 
-      case 'getTransaction':
+      case DocumentItemType.transaction:
         return this.provider.getTransaction(uid);
 
-      case 'getCertificate':
+      case DocumentItemType.certificate:
         return this.provider.getCertificate(uid);
 
-      case 'getDocument':
+      case DocumentItemType.document:
         return this.provider.getDocument(uid);
 
       default:
         throw new Error('Invalid document type');
     }
-
   }
 
 }
