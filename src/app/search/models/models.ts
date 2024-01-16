@@ -7,10 +7,12 @@
 
 export enum DocumentItemType {
     empty = 0,
-    resource = 1,
+    property = 1,
     transaction = 2,
     certificate = 4,
-    document = 8
+    document = 8,
+    association = 16,
+    noproperty = 32
 }
 
 

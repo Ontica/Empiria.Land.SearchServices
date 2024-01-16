@@ -13,12 +13,14 @@
 				</div>
 
 				<div class="text-align-center">
-					<select id="searchBox" #selectBox style='width:308px;' [ngModel]="searchDocument.type"
+					<select id="searchBox" #selectBox style='width:321px;' [ngModel]="searchDocument.type"
 						name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
 						<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
 						<option value="{{DocumentItemType.certificate}}">Un certificado</option>
-						<option value="{{DocumentItemType.document}}">Un documento inscrito (sello registral)</option>
-						<option value="{{DocumentItemType.resource}}">Un predio o sociedad (folio real)</option>
+						<option value="{{DocumentItemType.document}}">Un comprobante de inscripción (sello registral)</option>
+						<option value="{{DocumentItemType.property}}">Un predio (con folio real)</option>
+						<option value="{{DocumentItemType.association}}">Una sociedad (con folio único)</option>
+						<option value="{{DocumentItemType.noproperty}}">Un documento inscrito (con folio electrónico)</option>						
 						<option value="{{DocumentItemType.transaction}}">Un trámite</option>
 					</select>
 				</div>
@@ -28,7 +30,7 @@
 				</div>
 
 				<div class="text-align-center">
-					<input style='width:308px;margin:auto;' type="text" name="searchDocument" [(ngModel)]="searchDocument.uid"
+					<input style='width:321px;margin:auto;' type="text" name="searchDocument" [(ngModel)]="searchDocument.uid"
 						placeholder="{{selectedDocumentItemName}}" maxlength="20" id="searchValue"
 						(keydown.enter)="onSearchDocument()">
 				</div>
@@ -37,7 +39,7 @@
 
 			<div fxLayout="column" fxLayoutAlign="center center">
 
-				<div style='width:308px;' fxLayout="row" fxLayoutAlign="space-between center">
+				<div style='width:321px;' fxLayout="row" fxLayoutAlign="space-between center">
 					<span>
 						<label><a (click)="clearForm()">Limpiar datos</a></label>
 					</span>

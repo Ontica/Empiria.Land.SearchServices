@@ -57,8 +57,14 @@ export class SearchFormComponent implements OnInit {
       case DocumentItemType.empty:
         return 'Consultar';
 
-      case DocumentItemType.resource:
+      case DocumentItemType.property:
         return 'Folio real';
+
+      case DocumentItemType.association:
+        return 'Folio electrónico de la sociedad';
+
+      case DocumentItemType.noproperty:
+          return 'Folio asignado al poder o documento';
 
       case DocumentItemType.transaction:
         return 'Número de trámite';
@@ -167,8 +173,10 @@ export class SearchFormComponent implements OnInit {
 
   private validatePatterns(): boolean {
     switch (this.searchDocument.type) {
-      case DocumentItemType.resource:
-        if (this.searchDocument.uid.length !== 19 && this.searchDocument.uid.length !== 14) {
+
+      case DocumentItemType.property:
+        if (this.searchDocument.uid.length !== 14 &&
+            this.searchDocument.uid.length !== 19) {
           this.showValidatePatternsError();
           return false;
         }
@@ -198,6 +206,16 @@ export class SearchFormComponent implements OnInit {
         }
         break;
 
+
+      case DocumentItemType.association:
+      case DocumentItemType.noproperty:
+          if (this.searchDocument.uid.length !== 15) {
+            this.showValidatePatternsError();
+            return false;
+          }
+          break;
+
+          
       default:
         return false;
     }  // switch
