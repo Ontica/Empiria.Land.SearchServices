@@ -28,7 +28,7 @@ export class SearchService {
 
     switch (documentType) {
 
-      case DocumentItemType.property:
+      case DocumentItemType.realestate:
       case DocumentItemType.association:
       case DocumentItemType.noproperty:
         return this.provider.getResource(uid);

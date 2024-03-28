@@ -117,7 +117,7 @@ export class SearchKioskComponent {
     matched = uid.match(/TL-DOC-\d[A-Z]\d[A-Z]\d[A-Z]\d[A-Z\d]/g);
     if (matched && matched.length === 1) {
       return {
-        type: DocumentItemType.property,
+        type: DocumentItemType.realestate,
         uid: matched[0],
       };
     }
@@ -125,7 +125,7 @@ export class SearchKioskComponent {
     matched = uid.match(/TL-SC-[A-Z]\d[A-Z]\d[A-Z]\d\d[A-Z\d]/g);
     if (matched && matched.length === 1) {
       return {
-        type: DocumentItemType.property,
+        type: DocumentItemType.realestate,
         uid: matched[0],
       };
     }
@@ -133,7 +133,7 @@ export class SearchKioskComponent {
     matched = uid.match(/TL\d\d-[A-Z]\d[A-Z]\d-[A-Z][A-Z\d]\d[A-Z]-\d[A-Z]\d[A-Z\d]/g);
     if (matched && matched.length === 1) {
       return {
-        type: DocumentItemType.property,
+        type: DocumentItemType.realestate,
         uid: matched[0],
       };
     }

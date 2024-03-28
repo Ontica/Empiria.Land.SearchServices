@@ -7,7 +7,7 @@
 
 export enum DocumentItemType {
     empty = 0,
-    property = 1,
+    realestate = 1,
     transaction = 2,
     certificate = 4,
     document = 8,
