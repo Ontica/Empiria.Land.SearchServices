@@ -57,7 +57,7 @@ export class SearchFormComponent implements OnInit {
       case DocumentItemType.empty:
         return 'Consultar';
 
-      case DocumentItemType.property:
+      case DocumentItemType.realestate:
         return 'Folio real';
 
       case DocumentItemType.association:
@@ -125,7 +125,14 @@ export class SearchFormComponent implements OnInit {
   private getDocument(): void {
 
     const docType = this.route.snapshot.queryParamMap.get('type') || 'empty';
-    this.searchDocument.type = (DocumentItemType as any)[docType];
+
+    this.searchDocument.uid = this.route.snapshot.queryParamMap.get('uid') || '';
+
+    if (docType != 'resource') {
+      this.searchDocument.type = (DocumentItemType as any)[docType];
+    } else {
+      this.searchDocument.type = this.determineResourceDocumentType(this.searchDocument.uid);
+    }
 
     this.searchDocument.uid = this.route.snapshot.queryParamMap.get('uid') || '';
     this.itemHash = this.route.snapshot.queryParamMap.get('hash') || undefined;
@@ -134,6 +141,18 @@ export class SearchFormComponent implements OnInit {
     this.selectedDocumentItemName = this.getSelectedItemName();
     this.onSearchDocument();
 
+  }
+
+  determineResourceDocumentType(searchDocumentUID: string): DocumentItemType {
+    if (searchDocumentUID.startsWith('FR-')) {
+      return DocumentItemType.realestate;
+    } else if (searchDocumentUID.startsWith('PM-')) {
+      return DocumentItemType.association;
+    } else if (searchDocumentUID.startsWith('RD-')) {
+      return DocumentItemType.noproperty;
+    } else {
+      return DocumentItemType.empty;
+    }
   }
 
 
@@ -174,7 +193,7 @@ export class SearchFormComponent implements OnInit {
   private validatePatterns(): boolean {
     switch (this.searchDocument.type) {
 
-      case DocumentItemType.property:
+      case DocumentItemType.realestate:
         if (this.searchDocument.uid.length !== 14 &&
             this.searchDocument.uid.length !== 19) {
           this.showValidatePatternsError();
