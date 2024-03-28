@@ -16,7 +16,7 @@
 					<select id="searchBox" #selectBox style='width:324px;' [ngModel]="searchDocument.type"
 						name='cboDocumentItemType' (change)="onSelectDocumentItem(selectBox.value)">
 						<option value="{{DocumentItemType.empty}}">( Seleccionar una opción de la lista )</option>
-						<option value="{{DocumentItemType.certificate}}">Un certificado</option>
+						<!-- <option value="{{DocumentItemType.certificate}}">Un certificado</option> -->
 						<option value="{{DocumentItemType.document}}">Un sello registral (comprobante de inscripción)</option>
 						<option value="{{DocumentItemType.realestate}}">Un predio (con folio real)</option>
 						<option value="{{DocumentItemType.association}}">Una sociedad (con folio único)</option>
