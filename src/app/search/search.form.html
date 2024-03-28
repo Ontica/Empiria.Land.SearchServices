@@ -79,7 +79,7 @@
 			<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
 
 				<div [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="18">
-					<label class='small-label'>{{documentItem.name}}:</label>
+					<label class='small-label' [innerHtml]='documentItem.name'></label>
 				</div>
 
 				<div *ngIf="documentItem.style !== 'command'" [ngStyle.xs]="{'width':'90%'}" fxFlex.gt-xs="60">
